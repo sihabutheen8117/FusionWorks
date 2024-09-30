@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import {Link} from 'react-router-dom'
 
 const Login = () => {
 
@@ -51,6 +52,9 @@ const logIn = ()=>{
           </div>
           <div>
             <button onClick={logIn}>Log in</button>
+          </div>
+          <div>
+            are you new user ? <Link to="/sign/register" className="">Register</Link>
           </div>
 
        </div>
