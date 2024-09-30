@@ -17,19 +17,21 @@ import Applied from './component/main/dashboard/Applied';
 import Profile from './component/main/profile/Profile';
 import ChangePassword from './component/main/profile/ChangePassword';
 
-
-
-
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
+
           <Route path="/" element={<HomeLayout/>} />
+
+
           <Route path="/sign" element={ <SignLayout/> } >
             <Route path="login" element={ <Login/> }/>
             <Route path="register" element={ <Register/> }/>
           </Route>
+
+
           <Route path="/main" element={ <MainLayout/>} >
             <Route path="project" element={ <Project/>} />
             <Route path="events" element={ <Events/>} />
@@ -45,6 +47,7 @@ function App() {
               <Route path="changePassword" element={ <ChangePassword/> }/>
               <Route index element={ <Profile/> } />
             </Route>
+
             <Route index element={ <Project/>} />
           </Route>
         </Routes>
