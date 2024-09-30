@@ -3,14 +3,21 @@ import {BrowserRouter , Routes, Route} from 'react-router-dom'
 import MainLayout from './layout/MainLayout'
 import SignLayout from './layout/SignLayout';
 import HomeLayout from './layout/HomeLayout';
+import DashboardLayout from './layout/DashboardLayout';
+import ProfileLayout from './layout/ProfileLayout';
+
 import Login from './component/signin/Login';
 import Register from './component/signin/Register';
 import Clubs from './component/main/Clubs';
-import DashBoard from './component/main/DashBoard';
 import DiscussionForum from './component/main/DiscussionForum';
 import Events from './component/main/Events';
-import Profile from './component/main/Profile';
 import Project from './component/main/Project';
+import YourProjects from './component/main/dashboard/YourProjects';
+import Applied from './component/main/dashboard/Applied';
+import Profile from './component/main/profile/Profile';
+import ChangePassword from './component/main/profile/ChangePassword';
+
+
 
 
 function App() {
@@ -28,8 +35,16 @@ function App() {
             <Route path="events" element={ <Events/>} />
             <Route path="discussionForum" element={ <DiscussionForum/>} />
             <Route path="clubs" element={ <Clubs/>} />
-            <Route path="dashBoard" element={ <DashBoard/>} />
-            <Route path="profile" element={ <Profile/>} />
+            <Route path="dashBoard" element={ <DashboardLayout/> }>
+              <Route path="yourProject" element={ <YourProjects/> }/>
+              <Route path="applied" element={ <Applied/>  } />
+              <Route index element={ <YourProjects/> } />
+            </Route>
+            <Route path="profile" element={ <ProfileLayout/>}>
+              <Route path="profile" element={ <Profile/>  } />
+              <Route path="changePassword" element={ <ChangePassword/> }/>
+              <Route index element={ <Profile/> } />
+            </Route>
             <Route index element={ <Project/>} />
           </Route>
         </Routes>
