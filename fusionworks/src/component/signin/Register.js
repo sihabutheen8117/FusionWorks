@@ -219,7 +219,7 @@ const Register = () => {
 
           
           
-          <input type="submit"/>
+          <input type="submit" value="Register"/>
 
         </form>
       </div>
