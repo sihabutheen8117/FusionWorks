@@ -11,7 +11,7 @@ import Register from './component/signin/Register';
 import Clubs from './component/main/Clubs';
 import DiscussionForum from './component/main/DiscussionForum';
 import Events from './component/main/Events';
-import Project from './component/main/Project';
+import Project from './component/main/project/Project';
 import YourProjects from './component/main/dashboard/YourProjects';
 import Applied from './component/main/dashboard/Applied';
 import Profile from './component/main/profile/Profile';

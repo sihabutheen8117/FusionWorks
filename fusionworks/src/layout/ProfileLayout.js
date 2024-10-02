@@ -14,6 +14,9 @@ const ProfileLayout = () => {
           <div className=''>
             <Link to="/main/profile/changePassword">change password</Link>
           </div>
+          <div className=''>
+            log out
+          </div>
         </div>
       </div>
       <Outlet/>
