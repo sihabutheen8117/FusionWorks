@@ -26,6 +26,6 @@ const ProjectSchema = mongoose.Schema({
         type : [mongoose.Schema.Types.ObjectId],
         required : true ,
     }
-
-    
 })
+
+export const Projects = mongoose.model('Projects' ,ProjectSchema)
