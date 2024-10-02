@@ -12,6 +12,11 @@ const EventsSchema = mongoose.Schema({
         required : true,
     },
 
+    event_picture : {
+        type : Buffer ,
+        contentType : String ,
+    },
+
     createdAt: {
         type: Date,
         default: Date.now
