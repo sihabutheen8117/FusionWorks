@@ -1,7 +1,7 @@
 import mongoose, { Types } from "mongoose";
 
 const UserSchema = mongoose.Schema({
-    username : {
+    name : {
         type : mongoose.Schema.Types.String,
         required : true,
         unique : true,
