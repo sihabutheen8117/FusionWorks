@@ -8,14 +8,14 @@ router.post("/api/register" ,async (req ,res)=>{
     const newuser = new User(req.body)
     const savedUser = await newuser.save()
     console.log(savedUser)
-    console.log("succesfully received")
+    console.log("finally succesfully received")
 })
 
 router.post("/api/register/update", async (req ,res)=>{
 
 })
 
-router.post("/api/login" ,(req,res)=>{
+router.post("/api/login" ,async(req,res)=>{
 
 })
 

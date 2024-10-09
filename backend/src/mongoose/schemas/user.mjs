@@ -14,7 +14,6 @@ const UserSchema = mongoose.Schema({
     password :{
         type : mongoose.Schema.Types.String,
         required : true ,
-        unique : true ,
     },
     picture : {
         type : Buffer ,
