@@ -11,8 +11,14 @@ router.post("/api/register" ,async (req ,res)=>{
     console.log("succesfully received")
 })
 
+router.post("/api/register/update", async (req ,res)=>{
+
+})
+
 router.post("/api/login" ,(req,res)=>{
 
 })
+
+
 
 export default router ;
