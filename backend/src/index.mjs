@@ -1,7 +1,11 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors';
-import router from './Route/Auth.mjs';
+import routerAuth from './Route/Auth.mjs';
+import cookieParser from 'cookie-parser'
+import session from 'express-session'
+import routerMain from './Route/Main.mjs';
+import routerUser from './Route/User.mjs';
 
 
 const app = express()
@@ -15,7 +19,20 @@ mongoose.connect('mongodb://localhost/fusionworks')
 
 app.use(cors())
 app.use(express.json());
-app.use(router)
+app.use(session({
+    secret : "fusionworks dev",
+    saveUninitialized : false ,
+    resave : false,
+    cookie : {
+        maxAge : 60000*60, // 1 hour valid cookie
+    }
+}));
+app.use(cookieParser())
+
+// routers
+app.use(routerAuth)
+app.use(routerMain)
+app.use(routerUser)
 
 
 
