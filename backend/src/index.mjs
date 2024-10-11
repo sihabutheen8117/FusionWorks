@@ -8,6 +8,7 @@ import session from 'express-session'
 import routerMain from './Route/Main.mjs';
 import routerUser from './Route/User.mjs';
 import routerClub from './Route/Clubs.mjs';
+import MongoStore from "connect-mongo"
 
 const app = express()
 const PORT = process.env.PORT || 3005
@@ -28,7 +29,10 @@ app.use(session({
     resave : false,
     cookie : {
         maxAge : 60000*60, // 1 hour valid cookie
-    }
+    },
+    store : MongoStore.create({
+        client : mongoose.connection.getClient(),
+    })
 }));
 
 //passport

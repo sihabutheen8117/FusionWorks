@@ -1,6 +1,6 @@
 import { response, Router } from "express";
 import { User } from "../mongoose/schemas/user.mjs";
-import {body ,validationResult} from 'express-validator'
+import {body ,validationResult ,checkSchema } from 'express-validator'
 
 const routerAuth = Router();
 
