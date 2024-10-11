@@ -32,15 +32,19 @@ const EventsSchema = mongoose.Schema({
         required : true,
     },
 
-    apply : {
-        type : mongoose.Schema.Types.String,
-        required : true,
+    applied : {
+        type : [mongoose.Schema.Types.ObjectId],
+    },
+
+    apply_form : {
+        type :  mongoose.Schema.Types.String ,
+        required : true ,
     },
 
     creator : {
         type : mongoose.Schema.Types.ObjectId,
         required : true ,
-    }
+    }, 
 
 })
 
