@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import cors from 'cors';
 import routerAuth from './Route/Auth.mjs';
 import cookieParser from 'cookie-parser'
+import passport from "passport";
 import session from 'express-session'
 import routerMain from './Route/Main.mjs';
 import routerUser from './Route/User.mjs';
@@ -29,6 +30,11 @@ app.use(session({
         maxAge : 60000*60, // 1 hour valid cookie
     }
 }));
+
+//passport
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 //parsin the cookie
 app.use(cookieParser())

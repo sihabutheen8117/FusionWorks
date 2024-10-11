@@ -54,10 +54,9 @@ routerAuth.post("/api/register" ,
 
 
 routerAuth.post("/api/register/update", async (req ,res)=>{
-    console.log(req.session.id)
-    res.status(201).send({
-        status : "updated",
-    })
+
+    const {body}  = req ;
+    
 })
 
 routerAuth.post("/api/login" , [
