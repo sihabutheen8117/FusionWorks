@@ -100,5 +100,36 @@ routerUser.post("/api/projects/update/:id" , async (req ,res)=>{
     }
 })
 
+routerUser.delete("/api/projects/delete/:id" , async (req ,res)=>{
+
+    if(!req.user){
+        return res.status(401).json({
+            status : "not authendicated"
+        })
+    }
+
+    const id = req.params.id;
+
+    try {
+        
+        const deletedProject = await Projects.findByIdAndDelete(id);
+    
+        if (!deletedProject) {
+            return res.status(404).json({
+                errors: "Project not found or already deleted"
+            });
+        }
+    
+        return res.status(200).json({
+            status: "Project deleted successfully"
+        });
+    } catch (error) {
+        return res.status(500).json({
+            errors: "Server error",
+            message: error.message
+        });
+    }
+})
+
 
 export default routerUser ;
