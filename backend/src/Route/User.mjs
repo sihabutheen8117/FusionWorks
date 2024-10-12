@@ -173,7 +173,7 @@ routerUser.post("/api/discussionForum/newMessage" ,async (req, res)=> {
             creator : req.user.id
         })
 
-        const addedMessage = newMessage.save();
+        const addedMessage = await newMessage.save();
 
         if(!addedMessage){
             return res.status(401).json({
@@ -209,6 +209,10 @@ routerUser.post("/api/discussionForum/newMessage" ,async (req, res)=> {
     }
 
 
+})
+
+routerUser.post("/api/discussionForum/updateMessage" , async (req ,res)=>{
+    
 })
 
 export default routerUser ;

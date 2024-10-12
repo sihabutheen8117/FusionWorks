@@ -31,7 +31,8 @@ const dicussionSchema = mongoose.Schema ({
     replies : [messageSchema],
 
     numberOfReplies : {
-        type : mongoose.Schema.Types.Number
+        type : mongoose.Schema.Types.Number,
+        default  : 0
     },
 
     creator : {
@@ -41,6 +42,7 @@ const dicussionSchema = mongoose.Schema ({
 
     liked : {
         type : [mongoose.Schema.Types.ObjectId],
+        default : []
     },
 
     numberOfLikes : {
@@ -50,6 +52,7 @@ const dicussionSchema = mongoose.Schema ({
 
     disliked : {
         type : [mongoose.Schema.Types.ObjectId],
+        default : []
     },
 
     numberOfDisLikes : {
@@ -65,18 +68,17 @@ const dicussionSchema = mongoose.Schema ({
 
 })
 
-dicussionSchema.pre('save' , (next)=> {
+dicussionSchema.pre('save' , function (next) {
     this.numberOfLikes = this.liked.length;
     this.numberOfDisLikes = this.disliked.length;
     this.numberOfReplies = this.replies.length;
 
-    const messages= this;
-    messages.liked = [...new Set(messages.liked)];
-    messages.disliked = [...new Set(messages.disliked)]
+    this.liked = [...new Set(this.liked)];
+    this.disliked = [...new Set(this.disliked)]
 
     next();
 })
 
 
 
-export const Discussion = mongoose.model('Disscussion' ,dicussionSchema)
+export const Discussion = mongoose.model('Discussion' ,dicussionSchema)
