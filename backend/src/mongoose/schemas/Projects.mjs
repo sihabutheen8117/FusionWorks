@@ -14,7 +14,7 @@ const ProjectSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    decribtion : {
+    describtion : {
         type : mongoose.Schema.Types.String,
         required : true ,
     },
