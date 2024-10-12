@@ -1,6 +1,8 @@
 import { response, Router } from "express";
 import { User } from "../mongoose/schemas/user.mjs";
 import {body ,validationResult ,checkSchema } from 'express-validator'
+import "../strategies/local-strategy.mjs"
+import passport from "passport";
 
 const routerAuth = Router();
 
@@ -72,12 +74,28 @@ routerAuth.post("/api/login" , [
         .withMessage("password cannot be empty")
         .isLength({min : 8 , max : 32})
         .withMessage("password length should be 8<= and <=32")
-],async(req,res)=>{
+],
+passport.authenticate("local")
+,async(req,res)=>{
+    console.log(req.session.id)
 
-    const result = validationResult(req);
-    console.log(result);
+    res.status(200).send({
+        status : "successfully loggedIn"
+    })
 })
 
+
+routerAuth.get("/api/login/status" , (req,res)=>{
+    console.log("inside /api/login/status");
+    console.log(req.user)
+
+    return (req.user) ? res.status(200).send({
+        status : "logged in"
+    }) : res.status(401).send({
+        status : "not logged in"
+    })
+    
+})
 
 
 export default routerAuth ;

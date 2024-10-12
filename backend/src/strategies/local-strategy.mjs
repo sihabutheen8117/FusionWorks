@@ -1,16 +1,19 @@
 import passport from "passport";
 import { Strategy } from "passport-local";
+import { User } from "../mongoose/schemas/user.mjs";
 
 
 passport.serializeUser((user ,done) => {
-    done(null ,user)
+    done(null ,user._id)
 })
 
-passport.deserializeUser((user ,done)=>{
+passport.deserializeUser(async (id,done)=>{
     try {
-        //find user
+       
 
-        const user = "" //find user
+        const user = await User.findById({
+            _id : id
+        })
 
         if(!user) throw new Error("user not found")
         done(null ,user)
@@ -22,9 +25,11 @@ passport.deserializeUser((user ,done)=>{
 
 
 export default passport.use(
-    new Strategy({usernameField : "email"},(username,password,done)=>{
+    new Strategy({usernameField : "email"},async (username,password,done)=>{
         try{
-            const user = "" //find the user from mongodb
+            const user = await User.findOne({
+                email : username
+            })
 
             if(!user) throw new Error("user not found")
             if(user.password != password) throw new Error("Invalid credentials")
