@@ -15,26 +15,28 @@ routerClub.post("/api/postEvent/" ,
                 status : "event is successfully posted"
             })
         }
-        catch (err) {
-            if (err.name === "ValidationError"){
-                const errorMessages = {};
-
-                for (let field in err.errors) {
-                    errorMessages[field] = err.errors[field].message;
-                }
-      
-                // Log the entire error object for debugging
-                console.log('Validation Error Details:', err);
-
-                // Send a response with the error details
-                return res.status(400).send({
-                    message: 'Validation error',
-                    errors: errorMessages,
+        catch(error){
+            if (error.name === 'ValidationError') {
+                // Extract the validation errors and send them to the user
+                const validationErrors = {} ;
+                Object.keys(error.errors).forEach((field) => {
+                    validationErrors[field] = error.errors[field].message;
+                });
+                return res.status(400).json({ errors: validationErrors });
+            }
+    
+            // Check for duplicate key error (E11000)
+            if (error.code === 11000) {
+                const duplicateKey = Object.keys(error.keyValue)[0]; // Get the field causing the duplicate key error
+                const duplicateValue = error.keyValue[duplicateKey];
+                return res.status(400).json({
+                    error: `Duplicate value for ${duplicateKey}: '${duplicateValue}' already exists. Please choose another one.`
                 });
             }
-            else {
-                res.status(500).send({ error: 'Server error' });
-              }
+    
+            // Handle other errors
+            return res.status(500).json({ message: 'Server error' , err : error.message });
+              
         }
 
  })
