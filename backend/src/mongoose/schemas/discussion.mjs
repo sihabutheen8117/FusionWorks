@@ -69,7 +69,14 @@ dicussionSchema.pre('save' , (next)=> {
     this.numberOfLikes = this.liked.length;
     this.numberOfDisLikes = this.disliked.length;
     this.numberOfReplies = this.replies.length;
+
+    const messages= this;
+    messages.liked = [...new Set(messages.liked)];
+    messages.disliked = [...new Set(messages.disliked)]
+
     next();
 })
+
+
 
 export const Discussion = mongoose.model('Disscussion' ,dicussionSchema)
