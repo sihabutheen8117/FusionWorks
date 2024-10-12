@@ -60,14 +60,39 @@ routerUser.post("/api/projects/update/:id" , async (req ,res)=>{
     const id = req.params.id;
 
     try{
+
+        const finalUpdateObject = {} ;
+        if (body.newMemberId) {
+            
+            finalUpdateObject.$push = { members: body.newMemberId };
+        }
+        if (body.memberIdToRemove) {
+            finalUpdateObject.$pull = { members: body.memberIdToRemove };
+        }
+
+        const updateObject = {}
+
+        Object.keys(body).forEach(key => {
+            // Check if the key is neither newMember nor MemberToDelete
+            if (key !== 'newMemberId' && key !== 'memberIdToRemove') {
+                updateObject[key] = body[key]; // Add the field to updateObject
+            }
+        });
+        
+        
+        finalUpdateObject.$set = updateObject 
+        
+
+
         const updateProject =await Projects.findByIdAndUpdate(
             id,
-            { $set : body },
+            finalUpdateObject,
             { new: true, runValidators: true }
         )
         if(!updateProject){
             return res.status(404).json({
-                errors : "cant update project"
+                errors : "cant update project",
+                message : updateProject
             })
         }
 

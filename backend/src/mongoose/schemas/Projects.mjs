@@ -24,8 +24,16 @@ const ProjectSchema = mongoose.Schema({
     },
     members : {
         type : [mongoose.Schema.Types.ObjectId],
-        required : true ,
+        required : true 
     }
 })
+
+ProjectSchema.pre('save', function (next) {
+    const project = this; 
+
+    project.members = [...new Set(project.members)];
+
+    next();
+});
 
 export const Projects = mongoose.model('Projects' ,ProjectSchema)

@@ -54,6 +54,12 @@ routerMain.get("/api/projects" ,async (req,res)=>{
 })
 
 routerMain.get("/api/discussionForum" ,async (req,res)=>{
+    if(!req.user){
+        return res.status(401).send({
+            error : "not authendicated"
+        })
+    }
+
     
 })
 
