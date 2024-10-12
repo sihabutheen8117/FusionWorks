@@ -28,7 +28,10 @@ const dicussionSchema = mongoose.Schema ({
         required : true 
     },
 
-    replies : [messageSchema],
+    replies :{
+        type :  [messageSchema] ,
+        required : true
+    },
 
     numberOfReplies : {
         type : mongoose.Schema.Types.Number,
