@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/FusionWorks/static/css/main.154bd34f.css",
-    "main.js": "/FusionWorks/static/js/main.377d9a49.js",
+    "main.css": "/FusionWorks/static/css/main.87856479.css",
+    "main.js": "/FusionWorks/static/js/main.12f0c887.js",
     "static/js/453.c55f3ace.chunk.js": "/FusionWorks/static/js/453.c55f3ace.chunk.js",
-    "static/media/logo.svg": "/FusionWorks/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/FW_logo_processed.png": "/FusionWorks/static/media/FW_logo_processed.f885672a22faa265989e.png",
     "index.html": "/FusionWorks/index.html",
-    "main.154bd34f.css.map": "/FusionWorks/static/css/main.154bd34f.css.map",
-    "main.377d9a49.js.map": "/FusionWorks/static/js/main.377d9a49.js.map",
+    "main.87856479.css.map": "/FusionWorks/static/css/main.87856479.css.map",
+    "main.12f0c887.js.map": "/FusionWorks/static/js/main.12f0c887.js.map",
     "453.c55f3ace.chunk.js.map": "/FusionWorks/static/js/453.c55f3ace.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.154bd34f.css",
-    "static/js/main.377d9a49.js"
+    "static/css/main.87856479.css",
+    "static/js/main.12f0c887.js"
   ]
 }
