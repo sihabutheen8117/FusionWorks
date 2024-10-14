@@ -5,13 +5,15 @@ module.exports = {
   ],
   theme: {
     extend: {
-      width : {
-        '1/50' : '2%',
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'], 
       },
-      height : {
-        '1/50' : '2%',
+      colors: {
+        zinc: {
+          790: '#333336', 
+        },
       },
-    },
+    }
   },
   plugins: [],
 }
