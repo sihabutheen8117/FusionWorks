@@ -5,7 +5,7 @@ import image from '../../assets/FW_logo_processed.png';
 const MainHeader = () => {
   return (
     <div>
-      <div className='border-b-2 border-cyan-300'>
+      <div className='border-b-2 border-cyan-300 '>
         <div className='flex felx-row justify-between'>
             <div className='flex flex-row m-3 items-center'>
               <img src={image} alt='fusion works logo' className='w-10' />

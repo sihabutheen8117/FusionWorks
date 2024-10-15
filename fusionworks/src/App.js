@@ -19,7 +19,7 @@ import ChangePassword from './component/main/profile/ChangePassword';
 function App() {
   return (
     <div>
-      <HashRouter >
+      <BrowserRouter >
         <Routes>
 
           <Route path="/" element={<HomeLayout/>} />
@@ -50,7 +50,7 @@ function App() {
             <Route index element={ <Project/>} />
           </Route>
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 }

@@ -43,8 +43,9 @@ const Project = () => {
           </select>
         </div>
 
-        
-        <ProjectList/>
+        <div className='flex justify-center'>
+          <ProjectList/>
+        </div>
 
         {/* Add new project*/}
         
