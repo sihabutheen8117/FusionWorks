@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter , Routes, Route} from 'react-router-dom'
+import {BrowserRouter ,HashRouter,Routes, Route} from 'react-router-dom'
 import MainLayout from './layout/MainLayout'
 import SignLayout from './layout/SignLayout';
 import HomeLayout from './layout/HomeLayout';
@@ -19,10 +19,10 @@ import ChangePassword from './component/main/profile/ChangePassword';
 function App() {
   return (
     <div>
-      <BrowserRouter basename='/FusionWorks'>
+      <BrowserRouter >
         <Routes>
 
-          <Route path="/FusionWorks" element={<HomeLayout/>} />
+          <Route path="/" element={<HomeLayout/>} />
 
 
           <Route path="/sign" element={ <SignLayout/> } >

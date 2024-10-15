@@ -6,8 +6,12 @@ const MainLayout = () => {
   return (
     <div>
       <MainHeader/>
-      <Mainnavigator/>
-      <Outlet/>
+      <div className="md:flex">
+        <Mainnavigator/>
+        <div className="md:m-2">
+          <Outlet/>
+        </div>
+      </div>
     </div>
   )
 }

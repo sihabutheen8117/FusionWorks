@@ -20,6 +20,11 @@ const handleLogin = ()=>{
 
   return (
     <div>
+
+       <div className='m-2 bg-rose-600 hover:bg-rose-400 rounded-full w-20 h-8 flex items-center justify-center shadow-lg'>
+        <Link to="/" className="font-roboto font-bold text-white">Home</Link>
+       </div>
+
        <div className="flex flex-col justify-center items-center h-screen">
 
           {/* Fusion Works Logo */}
