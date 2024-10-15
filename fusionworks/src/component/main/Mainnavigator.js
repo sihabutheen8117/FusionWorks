@@ -10,24 +10,7 @@ const Mainnavigator = () => {
   return (
     <div>
       <div className=''>
-        {/* <div className="flex flex-col">
-            <div className='text-black'>
-                <Link to="/main/project">project</Link>
-            </div>
-            <div className='text-black'>
-                <Link to="/main/events">events</Link>
-            </div>
-            <div className='text-black'>
-                <Link to="/main/discussionForum">discussionForum</Link>
-            </div>
-            <div className='text-black'>
-                <Link to="/main/clubs">clubs</Link>
-            </div>
-            <div className='text-black'>
-                <Link to="/main/dashBoard">dashboard</Link>
-            </div>
-
-        </div> */}
+      
     <nav className=" text-white">
       <div className=" flex flex-col justify-between p-2">
         {/* Logo or Brand Name */}
@@ -49,31 +32,50 @@ const Mainnavigator = () => {
         </div>
 
         {/* Navigation Links */}
-        <div className={`md:flex md:flex-col md:w-56 md:h-screen ${isOpen ? '' : 'hidden'} bg-cyan-950`}>
-          <a  className="block px-4 py-2 hover:bg-gray-700 hover:rounded-full md:mx-1" 
+        <div className={`md:flex md:flex-col md:w-44 md:h-screen ${isOpen ? '' : 'hidden'} bg-[#101B35] md:border-r-4 md:border-cyan-400 md:shadow-[3px_0_10px_-5px_rgba(22,217,214,0.7)]`}>
+          <div  className="block px-4 py-2 hover:border-cyan-300 hover:shadow-[0px_3px_10px_-7px_rgba(22,217,214,0.7)] md:mx-1 border-b-2 border-slate-700 " 
             onClick={()=>{
               setIsOpen(false)
-              setOption("Home")
+              setOption("Project")
             }}
-          >Home</a>
-          <a  className="block px-4 py-2 hover:bg-gray-700 hover:rounded-full md:mx-2"
+          >
+            <Link to="/main/project">Project</Link>
+          </div>
+          <div  className="block px-4 py-2 hover:border-cyan-300 hover:shadow-[0px_3px_10px_-7px_rgba(22,217,214,0.7)] md:mx-2 border-b-2 border-slate-700"
             onClick={()=>{
               setIsOpen(false)
-              setOption("Home")
+              setOption("Events")
             }}
-          >About</a>
-          <a  className="block px-4 py-2 hover:bg-gray-700 hover:rounded-full md:mx-2"
+          >
+            <Link to="/main/events">Events</Link>
+          </div>
+          <div  className="block px-4 py-2 hover:border-cyan-300 hover:shadow-[0px_3px_10px_-7px_rgba(22,217,214,0.7)] md:mx-2 border-b-2 border-slate-700"
             onClick={()=>{
               setIsOpen(false)
-              setOption("Home")
+              setOption("DiscussionForum")
             }}
-          >Services</a>
-          <a  className="block px-4 py-2 hover:bg-gray-700 hover:rounded-full md:mx-2"
+          >
+            <Link to="/main/discussionForum">DiscussionForum</Link>
+          </div>
+
+          <div  className="block px-4 py-2 hover:border-cyan-300 hover:shadow-[0px_3px_10px_-7px_rgba(22,217,214,0.7)] md:mx-2 border-b-2 border-slate-700"
             onClick={()=>{
               setIsOpen(false)
-              setOption("Home")
+              setOption("Clubs")
             }}
-          >Contact</a>
+          >
+            <Link to="/main/clubs">Clubs</Link>
+          </div>
+
+          <div  className="block px-4 py-2 hover:border-cyan-300 hover:shadow-[0px_3px_10px_-7px_rgba(22,217,214,0.7)] md:mx-2 border-b-2 border-slate-700"
+            onClick={()=>{
+              setIsOpen(false)
+              setOption("Dashboard")
+            }}
+          >
+            <Link to="/main/dashBoard">Dashboard</Link>
+          </div>
+          
         </div>
       </div>
     </nav>
