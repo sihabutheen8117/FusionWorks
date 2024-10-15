@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 const ProjectList = () => {
 
-  const [lineClamp ,setLineClamp] =useState(false)
+  const [lineClamp ,setLineClamp] =useState(true)
 
   const toggleMore = () =>{
     setLineClamp(!lineClamp)
