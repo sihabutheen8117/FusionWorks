@@ -20,51 +20,67 @@ const handleLogin = ()=>{
 
   return (
     <div>
-       <div className="">
+       <div className="flex flex-col justify-center items-center h-screen">
 
-          <div>
-            Login to Fusion Works
+          {/* Fusion Works Logo */}
+          <div className=''>
+
           </div>
 
-          <form  onSubmit={handleLogin}  className=''>
-            <div className='relative'>
-              <input  type="email" placeholder="Email or user name" 
-              required
-              onChange={(event)=>{
-                setLog(previousLog=>{
-                  return{
-                    ...previousLog,
-                    "user" : event.target.value,
-                  }
-                })
-              }} className="border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none px-2 py-1" />
-              <label className="absolute -top-3 left-4 bg-white px-1 text-gray-500 text-sm">
-               email
-              </label>
-            </div>
-            <div className='relative'>
-              <input type="password" placeholder='Password' 
-              required
-              onChange={(event)=>{
-                setLog(previousLog=>{
-                  return{
-                    ...previousLog,
-                    "password" : event.target.value,
-                  }
-                })
-              }} className="border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none px-2 py-1" />
-              <label className="absolute -top-3 left-4 bg-white px-1 text-gray-500 text-sm">
-               password
-              </label>
-            </div>
-            <div>
-              <input type="submit" value="Login"/>
-            </div>
-            
-          </form>
+          {/* Login Cart */}
 
-          <div>
-              are you new user ? <Link to="/sign/register" className="">Register</Link>
+          <div className='rounded-md border-4 border-cyan-400 shadow-lg shadow-blue-500/50 p-5'>
+
+            <div className='text-center mb-5 text-blue-200 font-bold text-lg'>
+              Login to Fusion Works
+            </div>
+
+            <form  onSubmit={handleLogin}  className=''>
+
+              <div className='relative mb-4'>
+                <input  type="email" placeholder="Email or user name" 
+                required
+                onChange={(event)=>{
+                  setLog(previousLog=>{
+                    return{
+                      ...previousLog,
+                      "user" : event.target.value,
+                    }
+                  })
+                }} className="w-64 text-blue-100 border-2 border-cyan-400 bg-[#101B35] rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none px-2 py-1" />
+                <label className="absolute -top-3 left-4 bg-[#101B35] px-1 text-blue-100 font-semibold text-sm">
+                email
+                </label>
+              </div>
+
+              <div className='relative'>
+                <input type="password" placeholder='Password' 
+                required
+                onChange={(event)=>{
+                  setLog(previousLog=>{
+                    return{
+                      ...previousLog,
+                      "password" : event.target.value,
+                    }
+                  })
+                }} className="w-64 text-blue-100 border-2 border-cyan-400  bg-[#101B35] rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none px-2 py-1" />
+                <label className="absolute -top-3 left-4 bg-[#101B35] px-1 text-blue-100 font-semibold text-sm">
+                password
+                </label>
+              </div>
+
+              {/* Login Button */}
+              
+              <div className='text-center mt-3 '>
+                <input type="submit" className='text-blue-100 font-semibold bg-cyan-600 rounded-full border-4 border-cyan-600 pl-2 pr-2 hover:bg-[#101B35] hover:shadow-md hover:shadow-blue-500/50' value="Login"/>
+              </div>
+              
+            </form>
+
+            <div className='mt-1 text-blue-100  text-center'>
+                are you new user ? <Link to="/sign/register" className="">Register</Link>
+            </div>
+
           </div>
 
        </div>

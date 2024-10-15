@@ -12,6 +12,8 @@ module.exports = {
         zinc: {
           790: '#333336', 
         },
+
+        'myColor' : "#101B35",
       },
       
     }
