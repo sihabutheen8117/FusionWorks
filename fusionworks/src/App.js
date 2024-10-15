@@ -16,14 +16,13 @@ import YourProjects from './component/main/dashboard/YourProjects';
 import Applied from './component/main/dashboard/Applied';
 import Profile from './component/main/profile/Profile';
 import ChangePassword from './component/main/profile/ChangePassword';
-
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename='/FusionWorks'>
         <Routes>
 
-          <Route path="/" element={<HomeLayout/>} />
+          <Route path="/FusionWorks" element={<HomeLayout/>} />
 
 
           <Route path="/sign" element={ <SignLayout/> } >

@@ -13,6 +13,7 @@ module.exports = {
           790: '#333336', 
         },
       },
+      
     }
   },
   plugins: [],

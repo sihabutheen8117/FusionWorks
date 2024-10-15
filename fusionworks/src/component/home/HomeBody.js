@@ -4,20 +4,29 @@ const HomeBody = () => {
   return (
     <div>
 
+      {/* ALL in ONE */}
+
+      <div className='text-white flex flex-row justify-center mt-40 m-5 mb-30'>
+        <div className='text-4xl text-white w-8/12 font-bold text-center'>
+          An all-in-one platform for students and clubs to collaborate, share projects,
+          recruit talent, and foster innovation.
+        </div>
+      </div>
+
       {/* for logo and name */}
-      <div> 
+      <div className="mt-10"> 
 
       </div>
 
       {/* for Features */}
-      <div className=''>
+      <div className='' id="features">
         <div className='text-center font-roboto font-bold text-2xl text-white mb-10'>
           Features
         </div>
 
         <div className='flex flex-row flex-wrap justify-around '>
 
-          <div className='w-72 h-56 mt-10  font-roboto rounded-lg bg-zinc-800 hover:shadow-md hover:shadow-zinc-200 hover:w-[18.25rem] hover:h-[14.25rem] hover:bg-zinc-790'>
+          <div className='w-72 h-56 mt-10  font-roboto rounded-lg bg-sky-950 hover:shadow-md hover:shadow-zinc-200 hover:w-[18.25rem] hover:h-[14.25rem] hover:bg-sky-900'>
             <div className='text-white font-extrabold text-xl text-center m-5'>
               Are you working on something cool? Need contributors? 
             </div>
@@ -26,7 +35,7 @@ const HomeBody = () => {
             </div>
           </div>
 
-          <div className='w-72 h-56 mt-10  font-roboto rounded-lg bg-zinc-800 hover:shadow-md hover:shadow-zinc-200 hover:w-[18.25rem] hover:h-[14.25rem] hover:bg-zinc-790'>
+          <div className='w-72 h-56 mt-10  font-roboto rounded-lg bg-sky-950 hover:shadow-md hover:shadow-zinc-200 hover:w-[18.25rem] hover:h-[14.25rem] hover:bg-sky-900'>
             <div className='text-white font-extrabold text-xl text-center m-2'>
               Join Clubs
             </div>
@@ -38,7 +47,7 @@ const HomeBody = () => {
             </div>
           </div>
 
-          <div className='w-72 h-56 mt-10  font-roboto rounded-lg bg-zinc-800 hover:shadow-md hover:shadow-zinc-200 hover:w-[18.25rem] hover:h-[14.25rem] hover:bg-zinc-790'>
+          <div className='w-72 h-56 mt-10  font-roboto rounded-lg bg-sky-950 hover:shadow-md hover:shadow-zinc-200 hover:w-[18.25rem] hover:h-[14.25rem] hover:bg-sky-900'>
             <div className='text-white font-extrabold text-xl text-center m-5'>
               Ask & Answer Questions
             </div>
@@ -49,7 +58,7 @@ const HomeBody = () => {
             </div>
           </div>
 
-          <div className='w-72 h-56 mt-10  font-roboto rounded-lg bg-zinc-800 hover:shadow-md hover:shadow-zinc-200 hover:w-[18.25rem] hover:h-[14.25rem] hover:bg-zinc-790'>
+          <div className='w-72 h-56 mt-10  font-roboto rounded-lg bg-sky-950 hover:shadow-md hover:shadow-zinc-200 hover:w-[18.25rem] hover:h-[14.25rem] hover:bg-sky-900'>
             <div className='text-white font-extrabold text-xl text-center m-5'>
               Collaborate on Research
             </div>
@@ -65,7 +74,7 @@ const HomeBody = () => {
 
       {/* How it Works */}
 
-      <div className=''>
+      <div className='' id="how_its_works">
         <div className='text-center font-roboto font-bold text-2xl text-white mb-10 mt-16'>
           How it Works
         </div>
@@ -111,7 +120,14 @@ const HomeBody = () => {
 
       {/* About */}
 
-      
+
+      <div id="about" className='flex flex-row justify-center mt-40 m-5 mb-30'>
+        <div className='text-2xl text-white w-9/12 font-bold text-center'>
+          This platform was built with passion and dedication to empower college 
+          students and clubs to collaborate efficiently. Our mission is to create a space 
+          where individuals can share ideas, contribute to projects, and grow together.
+        </div>
+      </div>
 
     </div>
   )
