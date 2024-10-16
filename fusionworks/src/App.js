@@ -9,7 +9,7 @@ import ProfileLayout from './layout/ProfileLayout';
 import Login from './component/signin/Login';
 import Register from './component/signin/Register';
 import Clubs from './component/main/Clubs';
-import DiscussionForum from './component/main/DiscussionForum';
+import DiscussionForum from './component/main/discussion/DiscussionForum';
 import Events from './component/main/events/Events';
 import Project from './component/main/project/Project';
 import YourProjects from './component/main/dashboard/YourProjects';
