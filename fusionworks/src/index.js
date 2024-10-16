@@ -8,6 +8,9 @@ import {Provider} from 'react-redux'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+
+  // for git hub home page
+  //"homepage": "https://sihabutheen8117.github.io/FusionWorks",
   <React.StrictMode>
     <Provider store={store}>
       <App />
