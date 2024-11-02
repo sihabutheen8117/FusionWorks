@@ -1,25 +1,29 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { useState } from 'react'
+import { useGetRegisterMutation } from '../../feature/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
 
+  const navigate = useNavigate();
+  const [getRegister ,{isSuccess ,isLoading , isError} ] = useGetRegisterMutation();
   
   const [credentials ,setCredentials] = useState({
-    "email" :"",
-    "password" :"",
-    "rePassword":"",
-    "name":"",
-    "year":"1",
-    "college":"",
-    "department":"",
-    "section":"",
-    "wNumber":"",
+    email : "",
+    password : "",
+    rePassword : "",
+    name : "",
+    year : "1",
+    college : "",
+    department : "",
+    section : "",
+    wNumber : "",
   })
 
 
   {/* Register button Clicked */}
-  const handleRegister = (event)=>{
+  const handleRegister = async (event)=>{
     
     event.preventDefault()
     console.log(credentials.email)
@@ -32,7 +36,12 @@ const Register = () => {
     console.log(credentials.section)
     console.log(credentials.wNumber)
 
-    
+    try {
+      await getRegister(credentials).unwrap();  // Trigger the mutation
+      alert('Registered Successfull !!!');
+    } catch (error) {
+      alert(error.data.errors)
+    }
 
   }
 
@@ -43,6 +52,9 @@ const Register = () => {
   return (
     <div>
 
+      {/* after successful registered navigate to main page */}
+      {isSuccess ? navigate('/main') : "" } 
+       
       <div className='m-2 bg-rose-600 hover:bg-rose-400 rounded-full w-20 h-8 flex items-center justify-center shadow-lg'>
         <Link to="/" className="font-roboto font-bold text-white">Home</Link>
       </div>
@@ -69,7 +81,7 @@ const Register = () => {
                   setCredentials(preCredentials=>{
                     return {
                       ...preCredentials,
-                      "email" : event.target.value ,
+                      email : event.target.value ,
                     }
                   })
                 }}
@@ -88,7 +100,7 @@ const Register = () => {
                   setCredentials(preCredentials=>{
                     return {
                       ...preCredentials,
-                      "password" : event.target.value ,
+                      password : event.target.value ,
                     }
                   })
                 }}
@@ -116,7 +128,7 @@ const Register = () => {
                   setCredentials(preCredentials=>{
                     return {
                       ...preCredentials,
-                      "rePassword" : event.target.value ,
+                      rePassword : event.target.value ,
                     }
                   })
                 }}
@@ -133,7 +145,7 @@ const Register = () => {
                   setCredentials(preCredentials=>{
                     return {
                       ...preCredentials,
-                      "name" : event.target.value ,
+                      name : event.target.value ,
                     }
                   })
                 }}
@@ -149,7 +161,7 @@ const Register = () => {
                   setCredentials(preCredentials=>{
                     return {
                       ...preCredentials,
-                      "college" : event.target.value ,
+                      college : event.target.value ,
                     }
                   })
                 }}
@@ -168,7 +180,7 @@ const Register = () => {
                     setCredentials(preCredentials=>{
                       return {
                         ...preCredentials,
-                        "department" : event.target.value ,
+                        department : event.target.value ,
                       }
                     })
                   }}
@@ -184,7 +196,7 @@ const Register = () => {
                     setCredentials(preCredentials=>{
                       return {
                         ...preCredentials,
-                        "section" : event.target.value ,
+                        section : event.target.value ,
                       }
                     })
                   }}
@@ -201,7 +213,7 @@ const Register = () => {
                   setCredentials(preCredentials=>{
                     return {
                       ...preCredentials,
-                      "year" : event.target.value ,
+                      year : event.target.value ,
                     }
                   })
                 }}
@@ -221,7 +233,7 @@ const Register = () => {
                     setCredentials(preCredentials=>{
                       return {
                         ...preCredentials,
-                        "wNumber" : event.target.value ,
+                        wNumber : event.target.value ,
                       }
                     })
                   }}
@@ -236,7 +248,7 @@ const Register = () => {
               
               
               <div className='text-center mt-3'>
-                <input type="submit" className='text-blue-100 font-semibold bg-cyan-600 rounded-full border-4 border-cyan-600 pl-2 pr-2 hover:bg-[#101B35] hover:shadow-md hover:shadow-blue-500/50' value="Register"/>
+                <input type="submit" className='text-blue-100 font-semibold bg-cyan-600 rounded-full border-4 border-cyan-600 pl-2 pr-2 hover:bg-[#101B35] hover:shadow-md hover:shadow-blue-500/50' value={isLoading ? "Registering..."  : "Registered"}/>
               </div>
 
             </form>
