@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { useState } from 'react'
-import { useGetRegisterMutation } from '../../feature/authSlice'
+import { useGetRegisterMutation } from '../../feature/authApiSlice'
 import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
