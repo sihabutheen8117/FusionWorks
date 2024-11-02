@@ -1,7 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { useState } from 'react'
-import { useAddPostsMutation } from '../../feature/regsiterSlice.js'
 
 const Register = () => {
 
@@ -18,7 +17,6 @@ const Register = () => {
     "wNumber":"",
   })
 
-  const  [addPosts ,{data ,error ,isLoading }] = useAddPostsMutation();
 
   {/* Register button Clicked */}
   const handleRegister = (event)=>{
@@ -35,14 +33,6 @@ const Register = () => {
     console.log(credentials.wNumber)
 
     
-
-      addPosts({ 
-        name : credentials.name,
-        email : credentials.email,
-        password : credentials.password,
-      });
-   
-
 
   }
 

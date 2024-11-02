@@ -12,6 +12,8 @@ routerAuth.post("/api/register" ,async (req ,res)=>{
 
     const {body} = req ;
 
+    console.log("from Auth.mjs /api/register"+body.user)
+
     try{
         const newuser = new User(body)
         const savedUser = await newuser.save()
@@ -103,9 +105,9 @@ routerAuth.post("/api/register/update", async (req ,res)=>{
 
 //login
 routerAuth.post("/api/login" ,
-passport.authenticate("local")
-,(req,res)=>{
-   
+    passport.authenticate("local") ,
+(req,res)=>{
+    
     res.status(200).send({
         error : "",
         status : "successfully loggedIn"

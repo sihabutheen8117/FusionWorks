@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import {registerSlice} from '../feature/regsiterSlice'
+import { authSlice } from '../feature/authSlice';
 
 export const store = configureStore ({
 	reducer : {
-		[registerSlice.reducerPath] : registerSlice.reducer,
+		[authSlice.reducerPath] : authSlice.reducer,
 	},
 
 	middleware : (getDefaultMiddleware)=>
-		getDefaultMiddleware().concat(registerSlice.middleware),
+		getDefaultMiddleware().concat(authSlice.middleware),
 });
 
 export default store;

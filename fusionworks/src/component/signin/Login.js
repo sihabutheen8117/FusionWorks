@@ -1,18 +1,27 @@
 import React from 'react'
 import { useState } from 'react'
 import {Link} from 'react-router-dom'
+import { useGetLoginMutation } from '../../feature/authSlice'
+
 
 const Login = () => {
 
+  const [ getLogin ,{ isLoading, isSuccess, isError }] = useGetLoginMutation() ;
 
 //{/* Login button Clicked*/}
 const [log , setLog ] = useState({
-  "user" : "",
-  "password" : "",
+  user : "",
+  password : "",
 })
-const handleLogin = ()=>{
-  console.log(log.user)
-  console.log(log.password)
+const handleLogin = async ()=>{
+
+  try {
+    await getLogin(log).unwrap();  // Trigger the mutation
+    alert('Loged In');
+  } catch (error) {
+    alert(error.data.errors)
+  }
+
 }
 
 
@@ -49,7 +58,7 @@ const handleLogin = ()=>{
                   setLog(previousLog=>{
                     return{
                       ...previousLog,
-                      "user" : event.target.value,
+                      user : event.target.value,
                     }
                   })
                 }} className="w-64 text-blue-100 border-2 border-cyan-400 bg-[#101B35] rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none px-2 py-1" />
@@ -65,7 +74,7 @@ const handleLogin = ()=>{
                   setLog(previousLog=>{
                     return{
                       ...previousLog,
-                      "password" : event.target.value,
+                      password : event.target.value,
                     }
                   })
                 }} className="w-64 text-blue-100 border-2 border-cyan-400  bg-[#101B35] rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none px-2 py-1" />

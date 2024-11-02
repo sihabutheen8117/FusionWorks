@@ -1,5 +1,6 @@
 import React from 'react'
 import ProjectList from './ProjectList.js'
+import AddProject from './AddProject.js'
 import { useState } from 'react'
 
 
@@ -10,12 +11,22 @@ const Project = () => {
   const [filter,setFilter]  = useState("recent")
 
 
+  const [isAddProjectOpen, setIsAddProjectOpen] = useState(false); // State to manage the visibility of the AddProject component
+
+    const openAddProject = () => {
+        setIsAddProjectOpen(true);
+    };
+
+    const closeAddProject = () => {
+        setIsAddProjectOpen(false);
+    };
+
   return (
     <div>
       <div className=''>
 
         <div className='fixed lg:top-20 lg:right-7 bottom-5 right-7'>
-            <button className='text-white text-lg font-bold bg-cyan-500 hover:bg-cyan-600 py-1 px-5 rounded-full' >new</button>
+            <button className='text-white text-lg font-bold bg-cyan-500 hover:bg-cyan-600 py-1 px-5 rounded-full' onClick={openAddProject} >new</button>
         </div>
         
 
@@ -46,6 +57,8 @@ const Project = () => {
         <div className='flex justify-center'>
           <ProjectList/>
         </div>
+
+        {isAddProjectOpen && <AddProject onClose={closeAddProject} />}
 
         {/* Add new project*/}
         
