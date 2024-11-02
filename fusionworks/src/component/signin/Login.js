@@ -2,10 +2,12 @@ import React from 'react'
 import { useState } from 'react'
 import {Link} from 'react-router-dom'
 import { useGetLoginMutation } from '../../feature/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 
 const Login = () => {
-
+  
+  const navigate = useNavigate() ;
   const [ getLogin ,{ isLoading, isSuccess, isError }] = useGetLoginMutation() ;
 
 //{/* Login button Clicked*/}
@@ -29,6 +31,8 @@ const handleLogin = async ()=>{
 
   return (
     <div>
+      {/* after successful login navigate to main page */}
+       {isSuccess ? navigate('/main') : ""}
 
        <div className='m-2 bg-rose-600 hover:bg-rose-400 rounded-full w-20 h-8 flex items-center justify-center shadow-lg'>
         <Link to="/" className="font-roboto font-bold text-white">Home</Link>
@@ -86,7 +90,7 @@ const handleLogin = async ()=>{
               {/* Login Button */}
               
               <div className='text-center mt-3 '>
-                <input type="submit" className='text-blue-100 font-semibold bg-cyan-600 rounded-full border-4 border-cyan-600 pl-2 pr-2 hover:bg-[#101B35] hover:shadow-md hover:shadow-blue-500/50' value="Login"/>
+                <input type="submit" className='text-blue-100 font-semibold bg-cyan-600 rounded-full border-4 border-cyan-600 pl-2 pr-2 hover:bg-[#101B35] hover:shadow-md hover:shadow-blue-500/50' value={isLoading ? "loading..." : "Login"}/>
               </div>
               
             </form>
@@ -95,6 +99,7 @@ const handleLogin = async ()=>{
                 are you new user ? <Link to="/sign/register" className="">Register</Link>
             </div>
 
+          
           </div>
 
        </div>
