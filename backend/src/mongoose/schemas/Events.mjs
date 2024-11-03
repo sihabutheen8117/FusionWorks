@@ -38,9 +38,17 @@ const EventsSchema = mongoose.Schema({
     },
 
     creator : {
-        type : mongoose.Schema.Types.ObjectId,
-        required : true ,
-    }, 
+        id : {
+            type : mongoose.Schema.Types.ObjectId,
+            required : true ,
+
+        },
+        name : {
+            type : mongoose.Schema.Types.String,
+            required : true ,
+        }
+        
+    },
 
 })
 

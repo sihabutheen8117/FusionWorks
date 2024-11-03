@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
+import { formatDistanceToNow } from 'date-fns'
 
-const ProjectList = () => {
+const ProjectList = ({data}) => {
 
   const [lineClamp ,setLineClamp] =useState(true)
 
@@ -11,13 +12,7 @@ const ProjectList = () => {
 
   // Testin member
 
-  const members = [
-    { name: 'Member 1' },
-    { name: 'Member 2' },
-    { name: 'Member 3' },
-    { name: 'Member 4' },
-    { name: 'Member 5' },
-  ];
+  const members = data.members.details;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -32,7 +27,7 @@ const ProjectList = () => {
     <div>
 
 
-      <div className='flex flex-col rounded-lg ring-2 ring-cyan-700 md:w-full w-[29rem] '>
+      <div className='flex flex-col rounded-lg ring-2 ring-cyan-700 md:w-full md:m-0 m-2'>
 
         <div>
             <div className=" text-sky-200 flex flex-row font-medium items-center mt-2 ml-3 justify-between">
@@ -42,17 +37,17 @@ const ProjectList = () => {
 
                 </div>
                 <div className='font-bold ml-2 text-lg'>
-                  Sihabutheen Haq
+                  {data.creator.name}
                 </div>
               </div>
 
               <div className='flex flex-row gap-4'>
                 <div className='text-center text-sky-100'>
-                4 <i class="fas fa-users"></i>
+                {data.person_needed} <i class="fas fa-users"></i>
                 </div>
 
                 <div className=' text-center font-mono text-sky-100 text-opacity-50 mr-3'>
-                  1 hour ago
+                  { formatDistanceToNow(new Date(data.createdAt) ,{ addSuffix:true}) }
                 </div>
               </div>
             </div>
@@ -60,7 +55,7 @@ const ProjectList = () => {
         
         <div className='flex w-full items-center'>
           <div className={`${lineClamp ? 'truncate' :''}  text-white text-2xl font-semibold font-roboto  p-2 pl-4`}>
-            subject wrerethretprehtpwrehtpwhretrehtrehtphe reprpewr qhrpreh qrhqprhq  eferferfref erferfrefre feferferfref erfeferfer
+            {data.subject}
           </div>
           
           
@@ -69,7 +64,7 @@ const ProjectList = () => {
         {/* Describtion */}
 
         <div className={`overflow-hidden text-ellipsis ${lineClamp ? 'line-clamp-3' :''}  bg-gray-700 m-3 pl-3 py-1 rounded-xl text-sky-100 font-medium text-lg`}>
-        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+        {data.describtion}
         </div>
 
         <div className='flex flex-row justify-around mb-2 ml-4 mt-1'>

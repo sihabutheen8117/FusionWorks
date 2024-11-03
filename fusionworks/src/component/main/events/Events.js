@@ -1,10 +1,15 @@
 import React from 'react'
 import EventList from './EventList'
 import { useState } from 'react'
+import { useGetEventsQuery } from '../../../feature/userPostApi.js'
 
 const Events = () => {
+
+  const {data ,error , isLoading} = useGetEventsQuery();
   const [search ,setSearch] = useState("")
   const [filter,setFilter]  = useState("recent")
+
+  console.log(data);
 
 
   return (
@@ -35,9 +40,23 @@ const Events = () => {
           </select>
         </div>
 
-        <div className='flex justify-center'>
-          {/* Event list */}
-          <EventList/>
+        <div className='flex flex-col justify-center gap-6 w-full'>
+          {
+            isLoading ? "loading...": 
+            (filter === "old" ) ? data.map((data ,index)=>(
+              (search === "") ?
+              <EventList data={data} key={index}/> :
+              (data.subject.includes(search)) ?
+              <EventList data={data} key={index}/> : ""
+            )) : data.slice().reverse().map((data ,index)=>(
+              (search === "") ?
+              <EventList data={data} key={index}/> :
+              (data.subject.includes(search)) ?
+              <EventList data={data} key={index}/> : ""
+            ))
+            
+          }
+          
         </div>
 
         {/* Add new project*/}

@@ -14,9 +14,20 @@ routerUser.post("/api/project/post" ,async (req,res)=>{
 
     try{
         const {body} = req ;
+        console.log(body)
         const newProject = await Projects({
             ...body,
-            creator : req.user.id
+            creator : {
+                id : req.user.id ,
+                name : req.user.name
+            } ,
+            members : {
+                details : [{
+                    id : req.user.id ,
+                    name : req.user.name
+                }],
+            } ,
+            
         });
         const savedProject = await newProject.save();
         res.status(200).send({

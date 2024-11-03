@@ -16,17 +16,18 @@ routerMain.get("/api/events" ,async (req,res)=>{
     try {
         const events = await Events.find();
 
-        const eventsWithCount = events.map( (event)=>({
-            ...event.toObject(),
-            no_of_application : event.applied.length
-        }))
+        // const eventsWithCount = events.map( (event)=>({
+        //     ...event.toObject(),
+        //     no_of_application : event.applied.length || 0
+        // }))
 
-        res.status(200).json(eventsWithCount)
+        res.status(200).send(events)
     }
     catch (err) {
         console.log(err)
         res.status(500).send({
-            error : "error while fetching events"
+            status : "error while fetching events",
+            errors : err
         })
     }
 
@@ -42,7 +43,7 @@ routerMain.get("/api/projects" ,async (req,res)=>{
 
     try{
         const projects = await Projects.find();
-        res.status(200).json(projects)
+        res.status(200).send(projects)
 
     }catch (err){
        

@@ -14,7 +14,13 @@ routerClub.post("/api/events/post" ,
 
         const {body} = req;
         try {
-            const event = new Events(body);
+            const event = new Events({
+                ...body ,
+                creator : {
+                    id : req.user.id ,
+                    name : req.user.name,
+                }
+            });
             const savedEvent = await event.save();
             console.log(savedEvent)
             res.status(200).send({

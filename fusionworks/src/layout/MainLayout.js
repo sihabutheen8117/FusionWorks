@@ -8,7 +8,7 @@ const MainLayout = () => {
       <MainHeader/>
       <div className="md:flex">
         <Mainnavigator/>
-        <div className="md:m-2 md:w-[88%] w-full">
+        <div className="md:m-2 md:w-[87%] w-full">
           <Outlet/>
         </div>
       </div>

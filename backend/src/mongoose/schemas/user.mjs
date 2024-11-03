@@ -59,7 +59,12 @@ const UserSchema = mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
-      }
+    },
+
+    user_type : {
+        type : mongoose.Schema.Types.String,
+        required : true ,
+    }
 })
 
 export const User = mongoose.model('User' ,UserSchema)

@@ -6,35 +6,32 @@ import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
 
+  const navigate = useNavigate();
+  const [getRegister ,{ isLoading, isSuccess, isError } ] = useGetRegisterMutation();
   
   const [credentials ,setCredentials] = useState({
-    "email" :"",
-    "password" :"",
-    "rePassword":"",
-    "name":"",
-    "year":"1",
-    "college":"",
-    "department":"",
-    "section":"",
-    "wNumber":"",
+    email :"",
+    password :"",
+    rePassword :"",
+    name :"",
+    year :"1",
+    college :"",
+    department :"",
+    section :"",
+    wNumber :"",
   })
 
 
   {/* Register button Clicked */}
-  const handleRegister = (event)=>{
+  const handleRegister = async (event)=>{
     
     event.preventDefault()
-    console.log(credentials.email)
-    console.log(credentials.password)
-    console.log(credentials.rePassword)
-    console.log(credentials.name)
-    console.log(credentials.year)
-    console.log(credentials.college)
-    console.log(credentials.department)
-    console.log(credentials.section)
-    console.log(credentials.wNumber)
-
-    
+    try {
+      await getRegister(credentials).unwrap();  // Trigger the mutation
+      alert('Loged In');
+    } catch (error) {
+      alert(error)
+    }
 
   }
 
@@ -44,6 +41,8 @@ const Register = () => {
 
   return (
     <div>
+      {/* after successful register navigate to main page */}
+      {isSuccess ? navigate('/main') : ""}
 
       <div className='m-2 bg-rose-600 hover:bg-rose-400 rounded-full w-20 h-8 flex items-center justify-center shadow-lg'>
         <Link to="/" className="font-roboto font-bold text-white">Home</Link>
@@ -71,7 +70,7 @@ const Register = () => {
                   setCredentials(preCredentials=>{
                     return {
                       ...preCredentials,
-                      "email" : event.target.value ,
+                      email : event.target.value ,
                     }
                   })
                 }}
@@ -90,7 +89,7 @@ const Register = () => {
                   setCredentials(preCredentials=>{
                     return {
                       ...preCredentials,
-                      "password" : event.target.value ,
+                      password : event.target.value ,
                     }
                   })
                 }}
@@ -118,7 +117,7 @@ const Register = () => {
                   setCredentials(preCredentials=>{
                     return {
                       ...preCredentials,
-                      "rePassword" : event.target.value ,
+                      rePassword : event.target.value ,
                     }
                   })
                 }}
@@ -135,7 +134,7 @@ const Register = () => {
                   setCredentials(preCredentials=>{
                     return {
                       ...preCredentials,
-                      "name" : event.target.value ,
+                      name : event.target.value ,
                     }
                   })
                 }}
@@ -151,7 +150,7 @@ const Register = () => {
                   setCredentials(preCredentials=>{
                     return {
                       ...preCredentials,
-                      "college" : event.target.value ,
+                      college : event.target.value ,
                     }
                   })
                 }}
@@ -170,7 +169,7 @@ const Register = () => {
                     setCredentials(preCredentials=>{
                       return {
                         ...preCredentials,
-                        "department" : event.target.value ,
+                        department : event.target.value ,
                       }
                     })
                   }}
@@ -186,7 +185,7 @@ const Register = () => {
                     setCredentials(preCredentials=>{
                       return {
                         ...preCredentials,
-                        "section" : event.target.value ,
+                        section : event.target.value ,
                       }
                     })
                   }}
@@ -203,7 +202,7 @@ const Register = () => {
                   setCredentials(preCredentials=>{
                     return {
                       ...preCredentials,
-                      "year" : event.target.value ,
+                      year : event.target.value ,
                     }
                   })
                 }}
@@ -223,7 +222,7 @@ const Register = () => {
                     setCredentials(preCredentials=>{
                       return {
                         ...preCredentials,
-                        "wNumber" : event.target.value ,
+                        wNumber : event.target.value ,
                       }
                     })
                   }}

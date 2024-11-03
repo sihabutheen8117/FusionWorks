@@ -17,8 +17,17 @@ export const userPostApi = createApi({
             }),
         }),
 
+        getProjects  :builder.query({
+            query : () => '/api/projects',
+        }),
+
+        getEvents : builder.query({
+            query : () => '/api/events'
+        })
+
         
     }),
 });
 
-export const {usePostProjectMutation } = userPostApi ;
+
+export const {usePostProjectMutation ,useGetProjectsQuery , useGetEventsQuery} = userPostApi ;

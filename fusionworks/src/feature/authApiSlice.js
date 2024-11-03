@@ -16,17 +16,7 @@ export const authApiSlice = createApi({
                 method : "POST" ,
                 body : newPost ,
             }),
-            async onQueryStarted(args, { dispatch, queryFulfilled }) {
-                try {
-                    const { data } = await queryFulfilled;
-                    if (data.token) {
-                        // Set logged in state
-                        dispatch(setLoggedIn(data.token));
-                    }
-                } catch {
-                    dispatch(setLoggedOut()); // Optionally handle failed login
-                }
-            },
+            
         }),
 
         getRegister : builder.mutation({

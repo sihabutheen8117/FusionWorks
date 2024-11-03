@@ -23,7 +23,7 @@ const handleLogin = async ()=>{
     await getLogin(log).unwrap();  // Trigger the mutation
     alert('Loged In');
   } catch (error) {
-    alert(error.data.errors)
+    alert(error)
   }
 
 }

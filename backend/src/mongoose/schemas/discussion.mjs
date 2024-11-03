@@ -18,19 +18,15 @@ const messageSchema = mongoose .Schema({
 })
 
 const dicussionSchema = mongoose.Schema ({
-    subject : {
-        type : mongoose.Schema.Types.String,
-        required:true 
-    },
+ 
 
-    describtion : {
+    message : {
         type : mongoose.Schema.Types.String,
         required : true 
     },
 
     replies :{
         type :  [messageSchema] ,
-        required : true
     },
 
     numberOfReplies : {
@@ -39,8 +35,16 @@ const dicussionSchema = mongoose.Schema ({
     },
 
     creator : {
-        type : mongoose.Schema.Types.ObjectId,
-        required : true 
+        id : {
+            type : mongoose.Schema.Types.ObjectId,
+            required : true ,
+
+        },
+        name : {
+            type : mongoose.Schema.Types.String,
+            required : true ,
+        }
+        
     },
 
     liked : {
@@ -71,7 +75,7 @@ const dicussionSchema = mongoose.Schema ({
 
 })
 
-dicussionSchema.pre('save' , function (next) {
+dicussionSchema.post('save' , function (next) {
     this.numberOfLikes = this.liked.length;
     this.numberOfDisLikes = this.disliked.length;
     this.numberOfReplies = this.replies.length;

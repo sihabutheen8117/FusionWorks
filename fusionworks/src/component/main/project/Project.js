@@ -2,10 +2,13 @@ import React from 'react'
 import ProjectList from './ProjectList.js'
 import AddProject from './AddProject.js'
 import { useState } from 'react'
+import { useGetProjectsQuery } from '../../../feature/userPostApi.js'
 
 
 const Project = () => {
 
+
+  const {data ,error , isLoading} = useGetProjectsQuery();
 
   const [search ,setSearch] = useState("")
   const [filter,setFilter]  = useState("recent")
@@ -54,8 +57,22 @@ const Project = () => {
           </select>
         </div>
 
-        <div className='flex justify-center'>
-          <ProjectList/>
+        <div className='flex flex-col justify-center gap-6 w-full'>
+        {
+          
+          isLoading ? "loading...": 
+          (filter === "old" ) ? data.map((data ,index)=>(
+            (search === "") ?
+            <ProjectList data={data} key={index}/> :
+            (data.subject.includes(search)) ?
+            <ProjectList data={data} key={index}/> : ""
+          )) : data.slice().reverse().map((data ,index)=>(
+            (search === "") ?
+            <ProjectList data={data} key={index}/> :
+            (data.subject.includes(search)) ?
+            <ProjectList data={data} key={index}/> : ""
+          ))
+        }
         </div>
 
         {isAddProjectOpen && <AddProject onClose={closeAddProject} />}

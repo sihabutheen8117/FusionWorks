@@ -1,15 +1,23 @@
 import React from 'react';
 import { useState } from 'react';
+import { usePostProjectMutation } from '../../../feature/userPostApi';
 
 const AddProject = ({ onClose }) => {
+    const [ postProject ,{ isLoading, isSuccess, isError } ] = usePostProjectMutation();
+
     const [projectData , setProjectData ] = useState({
         subject : "" ,
-        persons : "" ,
+        person_needed : "" ,
         describtion : ""
     })
 
-    const handleSubmit = () =>  {
-        console.log(projectData)
+    const handleSubmit = async () =>  {
+        try {
+            await postProject(projectData).unwrap();  // Trigger the mutation
+            alert('posted successful !!!');
+          } catch (error) {
+            console.log(error)
+          }
     };
 
     const [isOpen, setIsOpen] = useState(true); // Initially set to true when AddProject is rendered
@@ -53,7 +61,7 @@ const AddProject = ({ onClose }) => {
                                     setProjectData(prevData => {
                                         return{
                                             ...prevData ,
-                                            persons : event.target.value
+                                            person_needed : event.target.value
                                         }
                                     })
                                 }}
