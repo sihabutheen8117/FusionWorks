@@ -75,15 +75,13 @@ const dicussionSchema = mongoose.Schema ({
 
 })
 
-dicussionSchema.post('save' , function (next) {
+dicussionSchema.pre('save' , function () {
     this.numberOfLikes = this.liked.length;
     this.numberOfDisLikes = this.disliked.length;
     this.numberOfReplies = this.replies.length;
 
     this.liked = [...new Set(this.liked)];
     this.disliked = [...new Set(this.disliked)]
-
-    next();
 })
 
 

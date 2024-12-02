@@ -1,10 +1,16 @@
 import React from 'react'
 import { useState } from 'react'
 import { formatDistanceToNow } from 'date-fns'
+import { usePostApplyMutation } from '../../../feature/userPostApi'
 
-const ProjectList = ({data}) => {
+const ProjectList = ({data , log }) => {
 
   const [lineClamp ,setLineClamp] =useState(true)
+
+  const Whitdraw = data.members.details.some( obj => obj.id === log.userId)
+
+
+  const [ postApply ,{ isLoading, isSuccess, isError } ] = usePostApplyMutation()
 
   const toggleMore = () =>{
     setLineClamp(!lineClamp)
@@ -20,8 +26,26 @@ const ProjectList = ({data}) => {
     setIsOpen(!isOpen);
   };
 
-  // Testing member
+  const handleApply = async () => {
+    try{
 
+      const options = Whitdraw || isSuccess ? false : true  
+
+      const newMember = {
+        id : data._id ,
+        data : {
+          newMember : options
+        }
+        
+      }
+
+      const result = await postApply( newMember ).unwrap()
+      
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
 
   return (
     <div>
@@ -77,7 +101,7 @@ const ProjectList = ({data}) => {
           {/* Testin member */}
 
           <div className="relative">
-      <button onClick={toggleCart} className=" text-sky-200 p-2 rounded">
+      <button onClick={toggleCart} className=" text-sky-200 p-2 rounded ">
         members  {members.length} <i class="fas fa-users"></i>
       </button>
 
@@ -121,7 +145,16 @@ const ProjectList = ({data}) => {
           </div>
 
           <div className="text-white font-mono text-xl font-bold">
-            <button className='bg-green-500 rounded-full p-1 px-4 hover:bg-green-600'>Apply</button>
+            <button className={` ${ Whitdraw ? "bg-red-500" : isSuccess ? "bg-red-500" : "bg-green-500" } rounded-full p-1 px-4 hover:bg-green-600`}
+              onClick={
+                handleApply
+              }
+            >
+
+              { Whitdraw ? "Whitdraw" : isLoading ? "Applying..." : isSuccess ? "Whitdraw" : "Apply"}
+              
+
+            </button>
           </div>
 
         </div>

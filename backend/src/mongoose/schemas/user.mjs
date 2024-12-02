@@ -1,5 +1,37 @@
 import mongoose, { Types } from "mongoose";
 
+const ClubMessages = mongoose.Schema({
+
+    subject : {
+        type : mongoose.Schema.Types.String,
+        required : true
+    },
+
+    details : {
+        type : mongoose.Schema.Types.String,
+        required : true
+    },
+
+    links: [
+        {
+            link_name: {
+                type: mongoose.Schema.Types.String,
+                required: true, // Ensure every link has a name
+            },
+            link_address: {
+                type: mongoose.Schema.Types.String,
+                required: true, // Ensure every link has an address
+            },
+        },
+    ],
+
+    createdAt :{
+        type : Date,
+        default : Date.now
+    }
+    
+})
+
 const UserSchema = mongoose.Schema({
     name : {
         type : mongoose.Schema.Types.String,
@@ -64,6 +96,10 @@ const UserSchema = mongoose.Schema({
     user_type : {
         type : mongoose.Schema.Types.String,
         required : true ,
+    },
+
+    club_messages : {
+        type : [ClubMessages]
     }
 })
 

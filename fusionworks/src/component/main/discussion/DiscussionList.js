@@ -1,26 +1,61 @@
 import React from 'react'
 import { useState } from 'react'
+import { formatDistanceToNow } from 'date-fns'
+import { usePostMessageMutation } from '../../../feature/userPostApi'
 
 const DiscussionList = (props) => {
 
 
+    const [ postMessage , { isLoading, isSuccess, isError } ] = usePostMessageMutation();
 
     const [reaction , setReaction ] = useState({
-        likes : 100000000 ,
-        dislikes : 0 ,
+        liked : false ,
+        disliked : false ,
     }) 
 
-    const handleLikes = () => {
-        setReaction(prev => ({
-            ...prev ,
-            likes : prev.likes +1 
-        }))
+    const handleLikes = async () => {
+
+        const updatedReaction = {
+            ...reaction ,
+            liked : !reaction.liked,
+            disliked : false
+        }
+
+        setReaction(updatedReaction)
+
+        const newData = {
+            reaction : updatedReaction,
+            id : props.data._id
+        }
+
+        try{
+            console.log(newData)
+            const response = await postMessage(newData).unwrap();
+            console.log(response)
+        }catch(error){
+            console.log(error)
+        }
     }
-    const handleDislikes = () => {
-        setReaction(prev => ({
-            ...prev ,
-            dislikes : prev.dislikes +1 
-        }))
+    const handleDislikes = async () => {
+        const updatedReaction = {
+            ...reaction ,
+            disliked : !reaction.disliked,
+            liked : false
+        }
+
+        setReaction(updatedReaction)
+
+        const newData = {
+            reaction : updatedReaction,
+            id : props.data._id
+        }
+
+        try{
+            const response = await postMessage(newData).unwrap();
+            console.log(response)
+        }catch(error){
+            console.log(error)
+        }
     }
 
 
@@ -39,11 +74,11 @@ const DiscussionList = (props) => {
                         </div>
                     </div>
                     <div className='text-center font-mono text-sky-100 text-opacity-50 mr-3 ml-4'>
-                        1 hour ago
+                     { formatDistanceToNow(new Date(props.data.createdAt) ,{ addSuffix:true}) }
                     </div>
                 </div>
-                <div className='bg-gray-700 m-3 pl-3 py-1 rounded-xl text-sky-100 font-medium text-lg'>
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                <div className='bg-gray-700 m-3 pl-3 pr-3 py-1 rounded-xl text-sky-100 font-medium text-lg'>
+                    {props.data.message}
                 </div>
                 
                 {/* Replies */}
@@ -62,7 +97,8 @@ const DiscussionList = (props) => {
                                 >
                                     <i className="fas fa-thumbs-up pt-1"></i>
                                     <div>
-                                        {reaction.likes === 0 ? '' : reaction.likes}
+                                        {props.data.numberOfLikes === 0 ? '' : props.data.numberOfLikes }
+                                        
                                     </div>
                                 </button>
                                 <button className='pl-2 flex flex-row items-center gap-2'
@@ -70,7 +106,7 @@ const DiscussionList = (props) => {
                                 >
                                     <i className="fas fa-thumbs-down pt-1"></i>
                                     <div>
-                                        {reaction.dislikes === 0 ? '' : reaction.dislikes}
+                                        {props.data.numberOfDisLikes === 0 ? '' : props.data.numberOfDisLikes}
                                     </div>
                                 </button>
                             </div>

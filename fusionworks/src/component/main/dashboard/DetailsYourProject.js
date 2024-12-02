@@ -8,46 +8,71 @@ import Members from './detailsOfProject/Members'
 import ProjectResources from './detailsOfProject/ProjectResources'
 
 
-const DetailsYourProject = () => {
+const DetailsYourProject = ({data}) => {
 
-  const [option ,setOption] = useState(<Members/>)
+  const [option ,setOption] = useState({
+    id : 1,
+    component : <Members/>
+  })
 
-
+  console.log(data)
   return (
     <div>
       <div className=''>
-        <div className=''>
-          Subject
-        </div>
-        <div className='container bg-slate-200'>
-          <div className=''>
-            <button onClick={()=>{
-              setOption(<Members/>)
-            }}>members</button>
+
+        <div className='border-2 border-cyan-400 rounded-lg mt-3'>
+
+          <div className='flex flex-auto justify-between px-3 gap-3 py-3 text-sky-200'>
+            <div className='text-white text-2xl font-semibold font-roboto'>
+              Subject 
+            </div>
+            <div className='text-center font-mono text-sky-100 text-opacity-50 mr-3'>
+               about 1 hour ago
+            </div>
           </div>
-          <div className=''>
-            <button onClick={()=>{
-                setOption(<JoinRequest/>)
-              }}>requests</button>
+
+          <div className='bg-gray-700 mx-3 mb-3 pl-3 py-1 rounded-xl text-sky-100 font-medium text-lg'>
+            describtion
           </div>
-          <div className=''>
-            <button onClick={()=>{
-                setOption(<Action/>)
-              }}>action</button>
-          </div>
-          <div className=''>
-            <button onClick={()=>{
-                  setOption(<ProjectResources/>)
-                }}>project resources </button>
+
+          <div className='border-2 rounded-lg border-cyan-400 m-3'>
+            <div className='flex flex-auto justify-around border-b-2 border-cyan-400 text-sky-100'>
+
+               <div className={` flex-1 border-r-2 border-cyan-400 text-center py-2 hover:bg-sky-300/10 ${ option.id == 1 ? "bg-sky-300/10" : ""}`}
+               onClick={() => setOption({
+                id : 1 ,
+                component : <Members/>
+               })}
+               >
+                  Members
+               </div>
+               <div className={`flex-1 border-r-2 border-cyan-400 text-center py-2 hover:bg-sky-300/10 ${ option.id == 2 ? "bg-sky-300/10" : ""}`}
+               onClick={() => setOption({
+                id : 2 ,
+                component : <Action/>
+               })}
+               >
+                  Action
+               </div>
+               <div className={`flex-1 text-center py-2 hover:bg-sky-300/10 ${ option.id == 3 ? "bg-sky-300/10" : ""}`}
+               onClick={() => setOption({
+                id : 3 ,
+                component : <ProjectResources/>
+               })}
+               >
+                  Resources
+               </div>
+
             </div>
 
-          <div className=''>
-            <button>delete</button>
+            <div>
+            {option.component}
+            </div>
+            
           </div>
+          
 
         </div>
-
-        {option}
       </div>
 
       

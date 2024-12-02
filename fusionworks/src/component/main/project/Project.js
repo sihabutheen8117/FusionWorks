@@ -3,10 +3,14 @@ import ProjectList from './ProjectList.js'
 import AddProject from './AddProject.js'
 import { useState } from 'react'
 import { useGetProjectsQuery } from '../../../feature/userPostApi.js'
+import { useSelector } from 'react-redux'
 
 
 const Project = () => {
 
+
+  const log = useSelector((state)=>state.user.log)
+  console.log(log)
 
   const {data ,error , isLoading} = useGetProjectsQuery();
 
@@ -33,7 +37,7 @@ const Project = () => {
         </div>
         
 
-        <div className='flex flex-row mb-4 items-center'>
+        <div className='flex flex-row mb-4 items-center fixed md:top-[4.5rem] top-[4.5rem] md:left-1/3 left-[9.5rem] z-50'>
           <div className='md:ml-10 ml-3 relative '>
             <input type="text" 
             placeholder = "search..."
@@ -57,20 +61,20 @@ const Project = () => {
           </select>
         </div>
 
-        <div className='flex flex-col justify-center gap-6 w-full'>
+        <div className='flex flex-col justify-center gap-6 w-full mt-16'>
         {
           
           isLoading ? "loading...": 
           (filter === "old" ) ? data.map((data ,index)=>(
             (search === "") ?
-            <ProjectList data={data} key={index}/> :
+            <ProjectList data={data} log={log} key={index}/> :
             (data.subject.includes(search)) ?
-            <ProjectList data={data} key={index}/> : ""
+            <ProjectList data={data} log={log} key={index}/> : ""
           )) : data.slice().reverse().map((data ,index)=>(
             (search === "") ?
-            <ProjectList data={data} key={index}/> :
+            <ProjectList data={data} log={log} key={index}/> :
             (data.subject.includes(search)) ?
-            <ProjectList data={data} key={index}/> : ""
+            <ProjectList data={data} log={log} key={index}/> : ""
           ))
         }
         </div>

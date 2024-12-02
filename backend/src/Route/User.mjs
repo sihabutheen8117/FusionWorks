@@ -14,7 +14,6 @@ routerUser.post("/api/project/post" ,async (req,res)=>{
 
     try{
         const {body} = req ;
-        console.log(body)
         const newProject = await Projects({
             ...body,
             creator : {
@@ -74,12 +73,19 @@ routerUser.post("/api/projects/update/:id" , async (req ,res)=>{
     try{
 
         const finalUpdateObject = {} ;
-        if (body.newMemberId) {
+        if (body.newMember) {
             
-            finalUpdateObject.$push = { members: body.newMemberId };
+            finalUpdateObject.$push = { "members.details": {
+                id : req.user.id,
+                name : req.user.name
+            } };
         }
-        if (body.memberIdToRemove) {
-            finalUpdateObject.$pull = { members: body.memberIdToRemove };
+        if (! body.newMember) {
+
+            finalUpdateObject.$pull = { "members.details": {
+                id : req.user.id,
+                name : req.user.name
+            } };
         }
 
         const updateObject = {}
@@ -101,16 +107,18 @@ routerUser.post("/api/projects/update/:id" , async (req ,res)=>{
             finalUpdateObject,
             { new: true, runValidators: true }
         )
+
         if(!updateProject){
             return res.status(404).json({
-                errors : "cant update project",
-                message : updateProject
+                status : "cant update project",
+                message : updateProject,
+                success : false
             })
         }
 
         return res.status(200).json({
             status : "projects updated",
-            errors : ""
+            success : true
         })
 
     }catch(error){
@@ -120,7 +128,9 @@ routerUser.post("/api/projects/update/:id" , async (req ,res)=>{
             Object.keys(error.errors).forEach((field) => {
                 validationErrors[field] = error.errors[field].message;
             });
-            return res.status(400).json({ errors: validationErrors });
+            return res.status(400).json({ errors: validationErrors ,
+                success : false
+            });
         }
 
         // Check for duplicate key error (E11000)
@@ -128,16 +138,20 @@ routerUser.post("/api/projects/update/:id" , async (req ,res)=>{
             const duplicateKey = Object.keys(error.keyValue)[0]; // Get the field causing the duplicate key error
             const duplicateValue = error.keyValue[duplicateKey];
             return res.status(400).json({
-                error: `Duplicate value for ${duplicateKey}: '${duplicateValue}' already exists. Please choose another one.`
+                error: `Duplicate value for ${duplicateKey}: '${duplicateValue}' already exists. Please choose another one.`,
+                success : false
             });
         }
 
         // Handle other errors
-        return res.status(500).json({ message: 'Server error' , err : error.message });
+        return res.status(500).json({ message: 'Server error' ,
+             err : error.message,
+            success : false
+         });
     }
 })
 
-routerUser.delete("/api/projects/delete/:id" , async (req ,res)=>{
+routerUser.post("/api/projects/delete/" , async (req ,res)=>{
 
     if(!req.user){
         return res.status(401).json({
@@ -145,7 +159,7 @@ routerUser.delete("/api/projects/delete/:id" , async (req ,res)=>{
         })
     }
 
-    const id = req.params.id;
+    const id = req.body.id
 
     try {
         
@@ -168,8 +182,7 @@ routerUser.delete("/api/projects/delete/:id" , async (req ,res)=>{
     }
 })
 
-
-routerUser.post("/api/discussionForum/newMessage" ,async (req, res)=> {
+routerUser.post("/api/discussionForum/Message/" ,async (req, res)=> {
     if(!req.user){
         return res.status(401).json({
             status : "not authendicated"
@@ -181,7 +194,10 @@ routerUser.post("/api/discussionForum/newMessage" ,async (req, res)=> {
     try{
         const newMessage = await Discussion({
             ...body ,
-            creator : req.user.id
+            creator : {
+                name : req.user.name ,
+                id : req.user.id
+            }
         })
 
         const addedMessage = await newMessage.save();
@@ -216,13 +232,13 @@ routerUser.post("/api/discussionForum/newMessage" ,async (req, res)=> {
         }
 
         // Handle other errors
-        return res.status(500).json({ message: 'Server error' , err : error.message });
+        return res.status(500).json({ message: 'Server error' , err : error });
     }
 
 
 })
 
-routerUser.post("/api/discussionForum/updateMessage/:id" , async (req ,res)=>{
+routerUser.post("/api/discussionForum/Message/:id" , async (req ,res)=>{
     if(!req.user){
         return res.status(401).json({
             status : "not authendicated"
@@ -231,9 +247,13 @@ routerUser.post("/api/discussionForum/updateMessage/:id" , async (req ,res)=>{
 
     try{
         const {body} = req ;
+        
         const id = req.params.id
 
         const updateObject = {}
+
+        updateObject.$pull = updateObject.$pull || {};
+        updateObject.$push = updateObject.$push || {};
 
         if(body.reply){
 
@@ -253,41 +273,55 @@ routerUser.post("/api/discussionForum/updateMessage/:id" , async (req ,res)=>{
             }
         }
 
-        if(body.liked){
-            updateObject.$push = {
-                liked : req.user.id
-            }
+        if(body.reaction.liked){
+            updateObject.$push.liked = req.user.id
+            
         }
 
-        if(body.disliked){
-            updateObject.$push = {
-                disliked : req.user.id
-            }
+        if(body.reaction.disliked){
+            updateObject.$push.disliked = req.user.id
+            
         }
 
-        if(body.removeLike){
-            updateObject.$pull = {
-                liked : req.user.id
-            }
+        if(!body.reaction.liked){
+            updateObject.$pull.liked = req.user.id
+            
         }
 
-        if(body.removeDislike){
-            updateObject.$pull = {
-                disliked : req.user.id
-            }
+        if(!body.reaction.disliked){
+            updateObject.$pull.disliked = req.user.id
+            
         }
+
 
         const updateMessage =await Discussion.findByIdAndUpdate(
             id,
             updateObject,
             { new: true, runValidators: true }
         )
+
+        
+
         if(!updateMessage){
             return res.status(404).json({
                 errors : "cant update project",
                 message : updateMessage
             })
         }
+
+        const discussion = await Discussion.findById(id);
+
+        if (!discussion) {
+            return res.status(404).json({
+                errors: "Discussion not found"
+            });
+        }
+
+        discussion.numberOfLikes = discussion.liked.length;
+        discussion.numberOfDisLikes = discussion.disliked.length;
+
+        // Step 4: Save the updated document to the database
+        const disresult = await discussion.save();
 
         return res.status(200).json({
             status : "projects updated",

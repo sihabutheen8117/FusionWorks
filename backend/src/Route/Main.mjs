@@ -2,6 +2,7 @@ import { Router } from "express";
 import { Events } from "../mongoose/schemas/Events.mjs";
 import { Projects } from "../mongoose/schemas/Projects.mjs";
 import { Discussion } from "../mongoose/schemas/discussion.mjs";
+import { User } from "../mongoose/schemas/user.mjs";
 
 const routerMain = Router()
 
@@ -57,6 +58,7 @@ routerMain.get("/api/projects" ,async (req,res)=>{
 })
 
 routerMain.get("/api/discussionForum" ,async (req,res)=>{
+    
     if(!req.user){
         return res.status(401).send({
             error : "not authendicated"
@@ -66,6 +68,31 @@ routerMain.get("/api/discussionForum" ,async (req,res)=>{
     try{
         const messages = await Discussion.find();
         res.status(200).json(messages)
+    }catch(err){
+
+        res.status(500).send({
+            status : "error while fetching messages",
+            error : err
+        })
+
+    }
+
+    
+})
+
+routerMain.get("/api/clubs" ,async (req,res)=>{
+    
+    if(!req.user){
+        return res.status(401).send({
+            error : "not authendicated"
+        })
+    }
+
+    try{
+
+        const clubUsers = await User.find({ user_type: "club" }).select("name links club_messages");
+        res.status(200).json(clubUsers)
+
     }catch(err){
 
         res.status(500).send({

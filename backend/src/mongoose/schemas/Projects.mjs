@@ -1,6 +1,46 @@
 import mongoose from "mongoose";
 
 
+const messageSchema = mongoose .Schema({
+    user : {
+        type : mongoose.Schema.Types.ObjectId,
+        required : true
+    },
+
+    message : {
+        type : mongoose.Schema.Types.String,
+        required : true
+    },
+
+    createdAt :{
+        type : Date,
+        default : Date.now
+    }
+})
+const resourcesSchema = mongoose.Schema({
+    user : {
+        type : mongoose.Schema.Types.ObjectId,
+        required : true
+    },
+    name : {
+        type : mongoose.Schema.Types.String,
+        required : true
+    },
+    desc : {
+        type : mongoose.Schema.Types.String,
+        required : true
+    },
+    link : {
+        type : mongoose.Schema.Types.String,
+        required : true
+    },
+    createdAt :{
+        type : Date,
+        default : Date.now
+    }
+    
+})
+
 const ProjectSchema = mongoose.Schema({
     subject : {
         type : mongoose.Schema.Types.String,
@@ -42,6 +82,10 @@ const ProjectSchema = mongoose.Schema({
                 required : true ,
             },
         }],
+
+        messages : [messageSchema],
+
+        resources : [resourcesSchema],
     }
 })
 

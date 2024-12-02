@@ -1,23 +1,24 @@
 import React from 'react';
 import { useState } from 'react';
-import { usePostProjectMutation } from '../../../feature/userPostApi';
+import { usePostEventsMutation } from '../../../feature/userPostApi';
 
-const AddProject = ({ onClose }) => {
-    const [ postProject ,{ isLoading, isSuccess, isError } ] = usePostProjectMutation();
+const AddEvents = ({ onClose }) => {
+
+    const [ postEvents ,{ isLoading, isSuccess, isError } ] = usePostEventsMutation();
 
     const [projectData , setProjectData ] = useState({
-        subject : "" ,
-        person_needed : "" ,
-        describtion : ""
+        title : "" ,
+        type_of_event : "" ,
+        describtion : "",
+        conducted_by : "",
+        apply_form : ""
     })
 
     const handleSubmit = async () =>  {
         try {
          
-        
-            const response = await postProject(projectData).unwrap();
-         
-            alert('Posted successfully!');
+            const response = await postEvents(projectData).unwrap();
+            alert('Event Posted successfully!');
             setIsOpen(false);
             onClose();
           } catch (error) {
@@ -38,19 +39,19 @@ const AddProject = ({ onClose }) => {
                 <>
                     <div className="fixed inset-0 bg-black opacity-50 z-50" onClick={closePopup}></div>
                     <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-300 shadow-lg p-6 z-50">
-                        <h2 className="text-lg font-bold mb-2" >Add New Project</h2>
+                        <h2 className="text-lg font-bold mb-2" >Add New Event</h2>
 
                         <div className="">
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" for="subject">
-                                    Subject
+                                <label className="block text-gray-700 text-sm font-bold mb-2" for="title">
+                                    Title
                                 </label>
-                                <input className="w-[320px] shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="subject" type="text" placeholder="subject" 
+                                <input className="w-[320px] shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" placeholder="title" 
                                 onChange={(event)=>{
                                     setProjectData(prevData => {
                                         return{
                                             ...prevData ,
-                                            subject : event.target.value
+                                            title : event.target.value
                                         }
                                     })
                                 }}
@@ -58,15 +59,47 @@ const AddProject = ({ onClose }) => {
                             </div>
                            
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" for="persons">
-                                    Persons needed
+                                <label className="block text-gray-700 text-sm font-bold mb-2" for="type_of_event">
+                                    Event Type
                                 </label>
-                                <input className="w-[320px] shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="persons" type="number" placeholder="persons" 
+                                <input className="w-[320px] shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="type_of_event" type="text" placeholder="event type" 
                                 onChange={(event)=>{
                                     setProjectData(prevData => {
                                         return{
                                             ...prevData ,
-                                            person_needed : event.target.value
+                                            type_of_event : event.target.value
+                                        }
+                                    })
+                                }}
+                                />
+                            </div>
+
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" for="conducted_by">
+                                    Conducted by
+                                </label>
+                                <input className="w-[320px] shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="conducted_by" type="text" placeholder="conducted by" 
+                                onChange={(event)=>{
+                                    setProjectData(prevData => {
+                                        return{
+                                            ...prevData ,
+                                            conducted_by : event.target.value
+                                        }
+                                    })
+                                }}
+                                />
+                            </div>
+
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" for="apply_form">
+                                    Link
+                                </label>
+                                <input className="w-[320px] shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="apply_form" type="text" placeholder="link" 
+                                onChange={(event)=>{
+                                    setProjectData(prevData => {
+                                        return{
+                                            ...prevData ,
+                                            apply_form : event.target.value
                                         }
                                     })
                                 }}
@@ -113,4 +146,4 @@ const AddProject = ({ onClose }) => {
     );
 };
 
-export default AddProject;
+export default AddEvents;

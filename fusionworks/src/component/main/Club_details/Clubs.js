@@ -1,36 +1,59 @@
 import React from 'react'
 import Clubs_view from './Clubs_view'
-import {useState } from 'react'
+import {useState ,useEffect } from 'react'
 import Club_scroll from './Club_scroll'
-
+import { useGetClubsQuery } from '../../../feature/userPostApi'
+import { useSelector } from 'react-redux'
+import AddClubMessage from './AddClubMessage'
 
 const Clubs = () => {
 
-  const [select , setSelect ] = useState("")
+  const {data ,error , isLoading} = useGetClubsQuery()
+  const [select , setSelect ] = useState({})
 
-  const [search ,setSearch] = useState("")
-  const [clubs , setClubs ] = useState([{id : 1 , club : "club 1"}
-    , {id : 2 , club : "club 2"}
-    , {id : 3 , club : "club 3"}
-    , {id : 4 , club : "club 4"}
-    , {id : 5 , club : "club 5"}
-    , {id : 6 , club : "club 6"}
-    , {id : 7 , club : "club 7"}
-    , {id : 8 , club : "club 8"}
-    , {id : 9 , club : "club 9"}
-  ])
+  const log = useSelector((state)=>state.user.log)
+  const [ isAdd , setAdd ] = useState(false)
+
+  const openAddEvent = () => {
+    setAdd(true)
+  }
+
+  const closeAddEvent = () => {
+    setAdd(false)
+  }
+
+  const [search ,setSearch] = useState({})
+  const [clubs , setClubs ] = useState([])
+
+  useEffect(() => {
+    if (data) {
+      setClubs(data);
+      setSelect(data[0])
+    }
+  }, [data]);
+
+  
 
   const handleClubs = (index) => {
     const newItems = [...clubs];
     const [selectedItem] = newItems.splice(index, 1); // Remove the clicked item
     newItems.unshift(selectedItem); // Add it to the beginning
-    setSelect(selectedItem.id)
+    setSelect(selectedItem)
     setClubs(newItems); // Update the state with reordered items
   }
-  
+
   return (
     <div>
       <div>
+
+      { log.type ?
+          <div className={`fixed lg:top-20 lg:right-7 bottom-5 right-7 `}>
+            <button className={`text-white text-lg font-bold bg-cyan-500 hover:bg-cyan-600 py-1 px-5 rounded-full  `}
+            onClick={openAddEvent}
+            >new</button>
+          </div> : ""
+        }
+
         <div className='flex flex-row items-center'>
           <div className='md:ml-10 ml-3 relative mb-3'>
                 <input type="text" 
@@ -52,9 +75,9 @@ const Clubs = () => {
             {
               clubs.map((club , index)=>(
                 <Club_scroll 
-                key = {club.id}
-                club_name = {club.club}
-                club_id = {club.id}
+                key = {club._id}
+                club_name = {club.name}
+                club_id = {club._id}
                 onClick= {()=> handleClubs(index)}
                 select = {select}
                 />  
@@ -64,8 +87,14 @@ const Clubs = () => {
         </div>
 
           <div className="m-2 mt-3">
-            <Clubs_view/>
+            {
+              select.club_messages ? select.club_messages.map((data , index)=><Clubs_view data={data} name={select.name} index={index}/>) 
+              : 'no data available'
+            }
+            
           </div>
+
+          {isAdd && <AddClubMessage onClose={closeAddEvent}/>}
       </div>
     </div>
   )

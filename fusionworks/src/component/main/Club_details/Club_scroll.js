@@ -1,8 +1,8 @@
 import React from 'react'
 
 const Club_scroll = (props) => {
-  const setSelect = (props.club_id == props.select) ? "border-cyan-400 border-2" : "border-blue-500" ;
-  
+  const setSelect = (props.club_id == props.select._id) ? "border-cyan-400 border-2" : "border-blue-500" ;
+
   return (
     <div>
       <div className={`rounded-full border w-fit ${setSelect} hover:border-cyan-400 hover:border-2`}>

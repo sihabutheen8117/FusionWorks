@@ -61,21 +61,37 @@ routerAuth.post("/api/register/update", async (req ,res)=>{
     }
 
     const {body} = req;
+    
 
     try{
-        const updatedUser = await User.findByIdAndUpdate(
-            req.user.id,
-            { $set : body },
-            { new: true, runValidators: true }
-        )
-        if (!updatedUser) {
-            return res.status(404).json({ message: 'User not found' });
+       
+        if(body.newMessage){
+            delete body.newMessage
+            const user = await User.findById(req.user.id);
+            if (!user) {
+                console.log('User not found!');
+                return;
+            }
+            user.club_messages.push(body);
+
+            await user.save();
+        }else{
+            const updatedUser = await User.findByIdAndUpdate(
+                req.user.id,
+                { $set : body },
+                { new: true, runValidators: true }
+            )
+            if (!updatedUser) {
+                return res.status(404).json({ message: 'User not found' });
+            }
         }
+        
 
         return res.status(200).json({
             errors : "",
             status : "profile updated successfully"
         })
+
     }catch (error){
 
         if (error.name === 'ValidationError') {
@@ -106,11 +122,16 @@ routerAuth.post("/api/register/update", async (req ,res)=>{
 //login
 routerAuth.post("/api/login" ,
     passport.authenticate("local") ,
-(req,res)=>{
+    (req,res)=>{
+
+    const user_type = req.user.user_type === "student" ? false : true
     
     res.status(200).send({
         error : "",
-        status : "successfully loggedIn"
+        status : "successfully loggedIn",
+        userId : req.user._id,
+        userName : req.user.name,
+        type : user_type
     })
 },
 (err, req, res, next) => {

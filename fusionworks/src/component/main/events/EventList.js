@@ -15,8 +15,8 @@ const EventList = ({data}) => {
     return (
       <div>
   
-  
-        <div className='flex flex-col rounded-lg ring-2 ring-cyan-700 md:w-full w-[29rem] '>
+  {/* flex flex-col rounded-lg ring-2 ring-cyan-700 md:w-full w-[29rem]  */}
+        <div className='flex flex-col rounded-lg ring-2 ring-cyan-700 md:w-full md:m-0 m-2 '>
   
           <div>
               <div className=" text-sky-200 flex flex-row font-medium items-center mt-2 ml-3 justify-between">
@@ -88,10 +88,12 @@ const EventList = ({data}) => {
             </div>
   
             <div className="text-white font-mono text-xl font-bold">
-              <a href={"https://"+data.apply_form} target='_blank' className='bg-green-500 rounded-full p-1 py-2 px-4 hover:bg-green-600'>Apply</a>
+              <a href={data.apply_form} target='_blank' className='bg-green-500 rounded-full p-1 py-2 px-4 hover:bg-green-600'>Apply</a>
             </div>
   
           </div>
+
+        
   
         </div>
         
