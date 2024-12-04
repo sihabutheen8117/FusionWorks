@@ -54,9 +54,9 @@ export const userPostApi = createApi({
 
         postApply : builder.mutation({
             query : (newPost) => ({
-                url : `/api/projects/update/${newPost.id}`,
+                url : `/api/projects/update/`,
                 method : "POST",
-                body : newPost.data ,
+                body : newPost ,
             }),
             invalidatesTags: ['Posts'],
         }),
@@ -83,8 +83,6 @@ export const userPostApi = createApi({
             }),
             invalidatesTags: ['Posts'],
         }),
-
-        
 
         
         

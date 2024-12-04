@@ -70,7 +70,7 @@ const DiscussionList = (props) => {
 
                         </div>
                         <div className='font-bold ml-1 text-lg text-sky-200'>
-                            {props.you ? 'you' : 'others name'}
+                            {props.you ? 'you' : props.data.creator.name }
                         </div>
                     </div>
                     <div className='text-center font-mono text-sky-100 text-opacity-50 mr-3 ml-4'>

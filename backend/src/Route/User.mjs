@@ -59,7 +59,7 @@ routerUser.post("/api/project/post" ,async (req,res)=>{
     }
 })
 
-routerUser.post("/api/projects/update/:id" , async (req ,res)=>{
+routerUser.post("/api/projects/update/" , async (req ,res)=>{
 
     if(!req.user){
         return res.status(401).json({
@@ -68,19 +68,21 @@ routerUser.post("/api/projects/update/:id" , async (req ,res)=>{
     }
 
     const {body} = req ;
-    const id = req.params.id;
+
+    const id = body.id
+    const data = body.data
 
     try{
 
         const finalUpdateObject = {} ;
-        if (body.newMember) {
+
+        if (data.newMember === "add") {
             
             finalUpdateObject.$push = { "members.details": {
                 id : req.user.id,
                 name : req.user.name
             } };
-        }
-        if (! body.newMember) {
+        }else if (data.newMember === "remove") {
 
             finalUpdateObject.$pull = { "members.details": {
                 id : req.user.id,
@@ -88,18 +90,49 @@ routerUser.post("/api/projects/update/:id" , async (req ,res)=>{
             } };
         }
 
+        if(data.memberToRemove){
+            finalUpdateObject.$pull = {
+                "members.details": {
+                id : data.memberToRemove.id,
+                name : data.memberToRemove.name
+            } 
+            }
+        }
+
+        if(data.newResources){
+            finalUpdateObject.$push = {
+                "members.resources" : {
+                    user : req.user.id,
+                    name : req.user.name,
+                    desc : data.newResources.desc,
+                    link : data.newResources.link
+                }
+            }
+        }
+
+
+        if(data.newMessage){
+             finalUpdateObject.$push = { "members.messages" : {
+                user : req.user.id,
+                name : req.user.name,
+                message : data.newMessage.message
+             }};
+        }
+
+
         const updateObject = {}
 
-        Object.keys(body).forEach(key => {
+        Object.keys(data).forEach(key => {
             // Check if the key is neither newMember nor MemberToDelete
             if (key !== 'newMemberId' && key !== 'memberIdToRemove') {
-                updateObject[key] = body[key]; // Add the field to updateObject
+                updateObject[key] = data[key]; // Add the field to updateObject
             }
         });
         
         
         finalUpdateObject.$set = updateObject 
         
+        console.log(finalUpdateObject)
 
 
         const updateProject =await Projects.findByIdAndUpdate(

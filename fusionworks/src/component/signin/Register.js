@@ -30,7 +30,7 @@ const Register = () => {
       await getRegister(credentials).unwrap();  // Trigger the mutation
       alert('Loged In');
     } catch (error) {
-      alert(error)
+      alert(JSON.stringify(error))
     }
 
   }

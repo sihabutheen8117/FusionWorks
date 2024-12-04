@@ -29,7 +29,7 @@ const ProjectList = ({data , log }) => {
   const handleApply = async () => {
     try{
 
-      const options = Whitdraw || isSuccess ? false : true  
+      const options = Whitdraw || isSuccess ? "remove" : "add" 
 
       const newMember = {
         id : data._id ,

@@ -6,7 +6,10 @@ const messageSchema = mongoose .Schema({
         type : mongoose.Schema.Types.ObjectId,
         required : true
     },
-
+    name : {
+        type : mongoose.Schema.Types.String,
+        required : true
+    },
     message : {
         type : mongoose.Schema.Types.String,
         required : true
@@ -80,6 +83,10 @@ const ProjectSchema = mongoose.Schema({
             name : {
                 type : mongoose.Schema.Types.String,
                 required : true ,
+            },
+            createdAt: {
+                type: Date,
+                default: Date.now
             },
         }],
 

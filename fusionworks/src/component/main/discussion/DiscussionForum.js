@@ -17,6 +17,7 @@ const DiscussionForum = () => {
   })
 
   const handleSearch = async () => {
+
     try{
       await postMessage(search).unwrap()
       alert("Message Posted !!!")

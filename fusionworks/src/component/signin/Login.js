@@ -21,10 +21,10 @@ const handleLogin = async ()=>{
 
   try {
     await getLogin(log).unwrap();  // Trigger the mutation
-    alert('Loged In');
+    alert('Logged In');
 
   } catch (error) {
-    alert(error)
+    alert(JSON.stringify(error))
   }
 
 }

@@ -5,7 +5,6 @@ const messageSchema = mongoose .Schema({
         type : mongoose.Schema.Types.ObjectId,
         required : true
     },
-
     message : {
         type : mongoose.Schema.Types.String,
         required : true
@@ -24,7 +23,6 @@ const dicussionSchema = mongoose.Schema ({
         type : mongoose.Schema.Types.String,
         required : true 
     },
-
     replies :{
         type :  [messageSchema] ,
     },
