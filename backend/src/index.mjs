@@ -26,7 +26,7 @@ mongoose.connect(process.env.MONGODB_CONNECT)
 
 //registering to main route
 app.use(cors({
-    origin: 'http://localhost:3000', 
+    origin: '*', 
     credentials: true 
 }))
 

@@ -9,7 +9,6 @@ const Project = () => {
 
 
   const log = useSelector((state)=>state.user.log)
-  console.log(log)
 
   const {data ,error , isLoading} = useGetProjectsQuery();
 
