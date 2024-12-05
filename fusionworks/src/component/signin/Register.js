@@ -19,6 +19,7 @@ const Register = () => {
     department :"",
     section :"",
     wNumber :"",
+    user_type : "student"
   })
 
 

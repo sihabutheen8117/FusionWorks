@@ -17,6 +17,10 @@ import Applied from './component/main/dashboard/Applied';
 import Profile from './component/main/profile/Profile';
 import ChangePassword from './component/main/profile/ChangePassword';
 function App() {
+
+  console.log(process.env.REACT_APP_API_URL
+    
+  )
   return (
     <div>
       <HashRouter >

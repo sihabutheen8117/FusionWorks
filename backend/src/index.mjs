@@ -9,13 +9,17 @@ import routerMain from './Route/Main.mjs';
 import routerUser from './Route/User.mjs';
 import routerClub from './Route/Clubs.mjs';
 import MongoStore from "connect-mongo"
+import dotenv from 'dotenv'
 
+
+dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 3005
 
 
 //connecting to the database
-mongoose.connect('mongodb://localhost/fusionworks')
+// 'mongodb://localhost/fusionworks'
+mongoose.connect(process.env.MONGODB_CONNECT)
 .then(()=>console.log(`Connected to Database`))
 .catch((err)=>console.log(`Error : ${err}`))
 
@@ -25,9 +29,10 @@ app.use(cors({
     origin: 'http://localhost:3000', 
     credentials: true 
 }))
+
 app.use(express.json());
 app.use(session({
-    secret : "fusionworks dev",
+    secret : process.env.SECRET_KEY,
     saveUninitialized : false ,
     resave : false,
     cookie : {

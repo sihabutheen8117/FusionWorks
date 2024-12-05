@@ -68,7 +68,7 @@ const Events = () => {
               <EventList data={data} key={index}/> :
               (data.subject.includes(search)) ?
               <EventList data={data} key={index}/> : ""
-            )) : data.slice().reverse().map((data ,index)=>(
+            )) : data?.slice().reverse().map((data ,index)=>(
               (search === "") ?
               <EventList data={data} key={index}/> :
               (data.title.includes(search)) ?

@@ -64,12 +64,12 @@ const Project = () => {
         {
           
           isLoading ? "loading...": 
-          (filter === "old" ) ? data.map((data ,index)=>(
+          (filter === "old" ) ? data?.map((data ,index)=>(
             (search === "") ?
             <ProjectList data={data} log={log} key={index}/> :
             (data.subject.includes(search)) ?
             <ProjectList data={data} log={log} key={index}/> : ""
-          )) : data.slice().reverse().map((data ,index)=>(
+          )) : data?.slice().reverse().map((data ,index)=>(
             (search === "") ?
             <ProjectList data={data} log={log} key={index}/> :
             (data.subject.includes(search)) ?
