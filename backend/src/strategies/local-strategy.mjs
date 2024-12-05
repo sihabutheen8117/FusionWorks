@@ -4,10 +4,12 @@ import { User } from "../mongoose/schemas/user.mjs";
 
 
 passport.serializeUser((user ,done) => {
+    console.log("Serializing user:", user._id);
     done(null ,user._id)
 })
 
 passport.deserializeUser(async (id,done)=>{
+    console.log("Deserializing user ID:", id);
     try {
        
 
@@ -16,9 +18,11 @@ passport.deserializeUser(async (id,done)=>{
         })
 
         if(!user) throw new Error("user not found")
+        console.log("Deserialized user:", user);
         done(null ,user)
 
     }catch(err){
+        console.error("Error during deserialization:", err);
         done(err,null)
     }
 })
