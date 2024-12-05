@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const userPostApi = createApi({
     reducerPath : 'postApi',
     baseQuery : fetchBaseQuery({ 
-        baseUrl : 'http://localhost:3005/',
+        baseUrl :process.env.API_URL,
         credentials : 'include'
     }),
 
