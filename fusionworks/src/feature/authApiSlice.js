@@ -5,7 +5,7 @@ import { storeUserLog } from './userLogSlice';
 export const authApiSlice = createApi({
     reducerPath : 'authApi',
     baseQuery : fetchBaseQuery({ 
-        baseUrl : process.env.API_URL,
+        baseUrl : process.env.REACT_APP_API_URL,
         credentials : 'include'
     }),
 

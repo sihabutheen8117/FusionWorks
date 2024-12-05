@@ -26,7 +26,13 @@ mongoose.connect(process.env.MONGODB_CONNECT)
 
 //registering to main route
 app.use(cors({
-    origin: '*', 
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true); // Allow the origin
+        } else {
+            callback(new Error('Not allowed by CORS')); // Block the origin
+        }
+    },
     credentials: true 
 }))
 
@@ -59,6 +65,6 @@ app.use(routerClub)
 
 
 
-app.listen(PORT ,'0.0.0.0', ()=>{
+app.listen(PORT , ()=>{
     console.log(`Running on PORT : ${PORT}`)
 })
