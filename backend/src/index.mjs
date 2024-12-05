@@ -31,6 +31,10 @@ app.use(cors({
 }))
 
 app.use(express.json());
+
+//parsin the cookie
+app.use(cookieParser())
+
 app.use(session({
     secret : process.env.SECRET_KEY,
     saveUninitialized : false ,
@@ -50,8 +54,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-//parsin the cookie
-app.use(cookieParser())
+
 
 // routers
 app.use(routerAuth)
