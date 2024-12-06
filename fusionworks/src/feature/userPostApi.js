@@ -4,7 +4,7 @@ export const userPostApi = createApi({
     reducerPath : 'postApi',
     baseQuery : fetchBaseQuery({ 
         baseUrl :process.env.REACT_APP_API_URL,
-        // credentials : 'include'
+        credentials : 'include'
     }),
 
     tagTypes: ['Posts' , 'Messages' , 'Events' , 'Clubs'],
