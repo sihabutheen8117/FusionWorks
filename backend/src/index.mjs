@@ -25,8 +25,10 @@ mongoose.connect(process.env.MONGODB_CONNECT)
 
 
 //registering to main route
+
+// https://fusionworks-frontend.onrender.com
 app.use(cors({
-    origin: 'https://fusionworks-frontend.onrender.com', 
+    origin: 'https://sihabutheen8117.github.io/FusionWorks/', 
     credentials: true 
 }))
 
