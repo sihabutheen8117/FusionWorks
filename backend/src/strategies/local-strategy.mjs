@@ -4,19 +4,19 @@ import { User } from "../mongoose/schemas/user.mjs";
 
 
 passport.serializeUser((user ,done) => {
-    console.log("Serializing user:", user._id);
+
     done(null ,user._id)
 })
 
 passport.deserializeUser(async (id,done)=>{
-    console.log("Deserializing user ID:", id);
+
     try {
         const user = await User.findById({
             _id : id
         })
 
         if(!user) throw new Error("user not found")
-        console.log("Deserialized user:", user);
+    
         done(null ,user)
 
     }catch(err){
@@ -28,7 +28,7 @@ passport.deserializeUser(async (id,done)=>{
 
 export default passport.use(
     new Strategy({usernameField : "user"},async (username,password,done)=>{
-        console.log("from passport")
+     
         try{
             const user = await User.findOne({
                 email : username

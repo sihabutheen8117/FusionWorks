@@ -19,6 +19,7 @@ const PORT = process.env.PORT || 3005
 
 //connecting to the database
 // 'mongodb://localhost/fusionworks'
+//process.env.MONGODB_CONNECT
 mongoose.connect(process.env.MONGODB_CONNECT)
 .then(()=>console.log(`Connected to Database`))
 .catch((err)=>console.log(`Error : ${err}`))
@@ -27,8 +28,9 @@ mongoose.connect(process.env.MONGODB_CONNECT)
 //registering to main route
 
 // https://fusionworks-frontend.onrender.com
+// https://fusionworks8117.netlify.app
 app.use(cors({
-    origin: 'https://fusionworks8117.netlify.app', 
+    origin: 'http://localhost:3000', 
     methods : ['GET' , "POST" , 'PUT' , 'DELETE'], 
     credentials: true 
 }))
@@ -44,8 +46,8 @@ app.use(session({
     resave : false,
     cookie : {
         maxAge : 60000 * 60,
-        secure: true,       // Ensures cookies are only sent over HTTPS
-        sameSite: 'none',
+        // secure: true,       // Ensures cookies are only sent over HTTPS
+        // sameSite: 'none',
     },
     store : MongoStore.create({
         client : mongoose.connection.getClient(),

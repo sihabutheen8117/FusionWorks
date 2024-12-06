@@ -37,7 +37,9 @@ routerMain.get("/api/events" ,async (req,res)=>{
 routerMain.get("/api/projects" ,async (req,res)=>{
 
     console.log("from /api/projects req ")
-    console.log(req);
+    console.log(req.session);
+    console.log(req.user)
+    console.log(req.cookies)
 
     if(!req.user){
         return res.status(401).send({
