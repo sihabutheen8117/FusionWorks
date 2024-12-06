@@ -42,7 +42,7 @@ app.use(session({
     cookie : {
         maxAge : 60000 * 60,
         secure: true,       // Ensures cookies are only sent over HTTPS
-        sameSite: 'none',
+        sameSite: 'strict',
     },
     store : MongoStore.create({
         client : mongoose.connection.getClient(),
