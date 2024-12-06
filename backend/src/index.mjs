@@ -25,10 +25,10 @@ mongoose.connect(process.env.MONGODB_CONNECT)
 
 
 //registering to main route
-app.use(cors({
-    origin: 'https://fusionworks-frontend.onrender.com', 
-    credentials: true 
-}))
+// app.use(cors({
+//     origin: 'https://fusionworks-frontend.onrender.com', 
+//     credentials: true 
+// }))
 
 app.use(express.json());
 
