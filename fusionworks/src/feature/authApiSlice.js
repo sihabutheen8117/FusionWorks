@@ -7,7 +7,6 @@ export const authApiSlice = createApi({
     baseQuery : fetchBaseQuery({ 
         baseUrl : process.env.REACT_APP_API_URL,
         credentials : 'include',
-        mode : 'no-cors'
     }),
 
     endpoints : (builder) => ({

@@ -30,6 +30,7 @@ passport.deserializeUser(async (id,done)=>{
 
 export default passport.use(
     new Strategy({usernameField : "user"},async (username,password,done)=>{
+        console.log("from passport")
         try{
             const user = await User.findOne({
                 email : username
