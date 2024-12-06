@@ -36,6 +36,9 @@ routerMain.get("/api/events" ,async (req,res)=>{
 
 routerMain.get("/api/projects" ,async (req,res)=>{
 
+    console.log("from /api/projects req ")
+    console.log(req);
+
     if(!req.user){
         return res.status(401).send({
             error : "not authendicated"
