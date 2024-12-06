@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGODB_CONNECT)
 
 // https://fusionworks-frontend.onrender.com
 app.use(cors({
-    origin: 'https://sihabutheen8117.github.io/FusionWorks/', 
+    origin: 'https://fusionworks8117.netlify.app/', 
     credentials: true 
 }))
 
