@@ -49,7 +49,7 @@ app.use(session({
         httpOnly : true,
         secure: true,       // Ensures cookies are only sent over HTTPS
         sameSite: 'none',
-        domain : 'https://fusionworks-backend.onrender.com'
+        domain : '.onrender.com'
     },
     store : MongoStore.create({
         client : mongoose.connection.getClient(),
