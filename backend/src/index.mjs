@@ -46,8 +46,10 @@ app.use(session({
     resave : false,
     cookie : {
         maxAge : 60000 * 60,
-        httpOnly : true,     // Ensures cookies are only sent over HTTPS
+        httpOnly : true,
+        secure: true,       // Ensures cookies are only sent over HTTPS
         sameSite: 'none',
+        domain : 'https://fusionworks-backend.onrender.com'
     },
     store : MongoStore.create({
         client : mongoose.connection.getClient(),
