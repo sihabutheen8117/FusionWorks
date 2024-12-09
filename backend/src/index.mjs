@@ -46,8 +46,7 @@ app.use(session({
     resave : false,
     cookie : {
         maxAge : 60000 * 60,
-        httpOnly : true,
-        secure: true,       // Ensures cookies are only sent over HTTPS
+        httpOnly : true,     // Ensures cookies are only sent over HTTPS
         sameSite: 'none',
     },
     store : MongoStore.create({
