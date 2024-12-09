@@ -2,10 +2,11 @@ import {  Router } from "express";
 import { User } from "../mongoose/schemas/user.mjs";
 import {body, validationResult } from 'express-validator'
 import "../strategies/local-strategy.mjs"
+// import "../strategies/jwt-startegy.mjs"
 import passport from "passport";
+import  jwt  from "jsonwebtoken";
 
 const routerAuth = Router();
-
 
 //registering 
 routerAuth.post("/api/register" ,async (req ,res)=>{
@@ -125,6 +126,13 @@ routerAuth.post("/api/login" ,
     (req,res)=>{
 
     const user_type = req.user.user_type === "student" ? false : true
+
+    const accessToken = jwt.sign({ username: req.user.name }, 'secret' ,{ expiresIn : '1d'});
+
+    res.cookie('jwt', accessToken , {
+        httpOnly : true ,
+        maxAge : 24 * 60 * 60 * 1000
+    })
     
     res.status(200).send({
         error : "",
@@ -144,6 +152,43 @@ routerAuth.post("/api/login" ,
     res.status(401).json({ message: 'Authentication failed. Invalid credentials.' });
 }
 )
+
+// login Through JWT
+
+// routerAuth.post("/api/login" ,
+//      async (req,res , next)=>{
+
+//    try{
+//     const userExists = await User.findOne({ email: req.body.user });
+
+//     if (!userExists)
+//         return res.status(400).send({ message: "user does not exist" });
+  
+//       // check if password is correct
+//     if (userExists.password !== req.body.password)
+//         return res.status(400).send({ message: "incorrect password" });
+
+//     const accessToken = jwt
+//       .sign(
+//         {
+//           id: userExists._id,
+//         },
+//         "d45ce50d12db9a0be0d5a42993740de1f09858812409eabf542ea7d90e5ca27ca98d13a776db878fc76563e8bcd6a4d812c1d146b9dca7ed45dab9f347858c76",
+//         { expiresIn: "1d" }
+//       )
+
+    
+//     res.status(200).send({
+//         error : "",
+//         status : "successfully loggedIn",
+//         accessToken: accessToken
+//     })
+//    }catch(error){
+//     console.log(error);
+//     next(error);
+//    }
+// }
+// )
 
 
 export default routerAuth ;

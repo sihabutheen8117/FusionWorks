@@ -30,7 +30,7 @@ mongoose.connect(process.env.MONGODB_CONNECT)
 // https://fusionworks-frontend.onrender.com
 // https://fusionworks8117.netlify.app
 app.use(cors({
-    origin: 'http://localhost:3000', 
+    origin: 'https://fusionworks-frontend.onrender.com', 
     methods : ['GET' , "POST" , 'PUT' , 'DELETE'], 
     credentials: true 
 }))

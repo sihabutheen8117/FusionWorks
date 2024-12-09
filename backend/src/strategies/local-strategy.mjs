@@ -4,12 +4,12 @@ import { User } from "../mongoose/schemas/user.mjs";
 
 
 passport.serializeUser((user ,done) => {
-
+    console.log("serializer")
     done(null ,user._id)
 })
 
 passport.deserializeUser(async (id,done)=>{
-
+    console.log("deserializer")
     try {
         const user = await User.findById({
             _id : id

@@ -3,6 +3,8 @@ import { Events } from "../mongoose/schemas/Events.mjs";
 import { Projects } from "../mongoose/schemas/Projects.mjs";
 import { Discussion } from "../mongoose/schemas/discussion.mjs";
 import { User } from "../mongoose/schemas/user.mjs";
+// import "../strategies/jwt-startegy.mjs"
+// import passport from 'passport'
 
 const routerMain = Router()
 
@@ -34,11 +36,10 @@ routerMain.get("/api/events" ,async (req,res)=>{
 
 })
 
-routerMain.get("/api/projects" ,async (req,res)=>{
+routerMain.get("/api/projects" ,
+    async (req,res)=>{
 
     console.log("from /api/projects req ")
-    console.log(req.session);
-    console.log(req.user)
     console.log(req.cookies)
 
     if(!req.user){

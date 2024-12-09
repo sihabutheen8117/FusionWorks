@@ -20,7 +20,6 @@ const DiscussionForum = () => {
 
     try{
       await postMessage(search).unwrap()
-      alert("Message Posted !!!")
     }catch(error){
       console.log(error)
     }
