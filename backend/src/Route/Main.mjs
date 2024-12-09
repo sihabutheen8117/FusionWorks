@@ -3,11 +3,12 @@ import { Events } from "../mongoose/schemas/Events.mjs";
 import { Projects } from "../mongoose/schemas/Projects.mjs";
 import { Discussion } from "../mongoose/schemas/discussion.mjs";
 import { User } from "../mongoose/schemas/user.mjs";
+import cookieParser from "cookie-parser";
 // import "../strategies/jwt-startegy.mjs"
 // import passport from 'passport'
 
 const routerMain = Router()
-
+routerMain.use(cookieParser())
 routerMain.get("/api/events" ,async (req,res)=>{
 
     if(!req.user){
@@ -41,6 +42,7 @@ routerMain.get("/api/projects" ,
 
     console.log("from /api/projects req ")
     console.log(req.cookies)
+    console.log(req.headers)
 
     if(!req.user){
         return res.status(401).send({
