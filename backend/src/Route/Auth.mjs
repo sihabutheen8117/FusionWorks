@@ -131,7 +131,9 @@ routerAuth.post("/api/login" ,
 
     res.cookie('jwt', accessToken , {
         httpOnly : true ,
-        maxAge : 24 * 60 * 60 * 1000
+        maxAge : 24 * 60 * 60 * 1000,
+        secure : true ,
+        sameSite : 'none'
     })
     
     res.status(200).send({
