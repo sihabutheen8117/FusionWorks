@@ -10,6 +10,9 @@ import routerUser from './Route/User.mjs';
 import routerClub from './Route/Clubs.mjs';
 import MongoStore from "connect-mongo"
 import dotenv from 'dotenv'
+import MongoDBStore from "connect-mongodb-session";
+
+const mongoStore = MongoDBStore(session);
 
 
 dotenv.config()
@@ -51,9 +54,15 @@ app.use(session({
         sameSite: 'none',
         domain : '.onrender.com'
     },
-    store : MongoStore.create({
-        client : mongoose.connection.getClient(),
-    })
+    // store : MongoStore.create({
+    //     client : mongoose.connection.getClient(),
+    // })
+
+    store : new mongoStore({
+        collection: "userSessions",
+        uri: "mongodb+srv://sihabutheen8117:5g3s0nuLL9YSvj8h@fusionworks.goncn.mongodb.net/?retryWrites=true&w=majority&appName=FusionWorks",
+        expires: 10000* 1000,
+      }),
 }));
 
 //passport
