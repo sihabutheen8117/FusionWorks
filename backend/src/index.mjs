@@ -65,6 +65,16 @@ app.use(session({
       }),
 }));
 
+app.use((req, res, next) => {
+    const originalSetHeader = res.setHeader;
+    res.setHeader = function (name, value) {
+        if (name === 'Set-Cookie' && Array.isArray(value)) {
+            value = value.map(cookie => `${cookie}; Partitioned`);
+        }
+        originalSetHeader.call(this, name, value);
+    };
+    next();
+});
 //passport
 
 app.use(passport.initialize())
