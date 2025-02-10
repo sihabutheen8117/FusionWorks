@@ -33,9 +33,9 @@ const DiscussionForum = () => {
           isLoading ? "Loading..." :
           data?.map((data, index) => {
             return data.creator.id === userLog.userId ? (
-              <DiscussionList data={data} you={true} index={index} />
+              <DiscussionList data={data} you={true} index={index} key = {index}/>
             ) : (
-              <DiscussionList data={data} you={false} index={index} />
+              <DiscussionList data={data} you={false} index={index} key = {index}/>
             );
           })
         }

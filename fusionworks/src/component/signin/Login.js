@@ -3,7 +3,7 @@ import { useState } from 'react'
 import {Link} from 'react-router-dom'
 import { useGetLoginMutation } from '../../feature/authApiSlice'
 import { useNavigate } from 'react-router-dom'
-
+import { useEffect } from 'react'
 
 const Login = () => {
 
@@ -29,13 +29,17 @@ const handleLogin = async ()=>{
 
 }
 
-
+useEffect(() => {
+  if (isSuccess) {
+    navigate('/main');
+  }
+}, [isSuccess, navigate]);
 
 
   return (
     <div>
       {/* after successful login navigate to main page */}
-       {isSuccess ? navigate('/main') : ""}
+       {/* {isSuccess ? navigate('/main') : ""} */}
 
        <div className='m-2 bg-rose-600 hover:bg-rose-400 rounded-full w-20 h-8 flex items-center justify-center shadow-lg'>
         <Link to="/" className="font-roboto font-bold text-white">Home</Link>

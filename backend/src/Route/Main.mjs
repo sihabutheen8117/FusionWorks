@@ -4,12 +4,15 @@ import { Projects } from "../mongoose/schemas/Projects.mjs";
 import { Discussion } from "../mongoose/schemas/discussion.mjs";
 import { User } from "../mongoose/schemas/user.mjs";
 import cookieParser from "cookie-parser";
+import { verifyToken } from "../strategies/jwt-auth.mjs";
 // import "../strategies/jwt-startegy.mjs"
 // import passport from 'passport'
 
 const routerMain = Router()
 routerMain.use(cookieParser())
-routerMain.get("/api/events" ,async (req,res)=>{
+
+
+routerMain.get("/api/events" ,verifyToken ,async (req,res)=>{
 
     if(!req.user){
         return res.status(401).send({
@@ -28,7 +31,6 @@ routerMain.get("/api/events" ,async (req,res)=>{
         res.status(200).send(events)
     }
     catch (err) {
-        console.log(err)
         res.status(500).send({
             status : "error while fetching events",
             errors : err
@@ -38,11 +40,8 @@ routerMain.get("/api/events" ,async (req,res)=>{
 })
 
 routerMain.get("/api/projects" ,
+    verifyToken ,
     async (req,res)=>{
-
-    console.log("from /api/projects req ")
-    console.log(req.cookies)
-    console.log(req.headers)
 
     if(!req.user){
         return res.status(401).send({
@@ -65,7 +64,7 @@ routerMain.get("/api/projects" ,
 
 })
 
-routerMain.get("/api/discussionForum" ,async (req,res)=>{
+routerMain.get("/api/discussionForum" ,verifyToken ,async (req,res)=>{
     
     if(!req.user){
         return res.status(401).send({
@@ -88,7 +87,7 @@ routerMain.get("/api/discussionForum" ,async (req,res)=>{
     
 })
 
-routerMain.get("/api/clubs" ,async (req,res)=>{
+routerMain.get("/api/clubs" ,verifyToken ,async (req,res)=>{
     
     if(!req.user){
         return res.status(401).send({

@@ -48,7 +48,7 @@ const YourProjects = () => {
             {
               data?.map((obj , index)=>
                 obj.members.details?.some((x)=>  x.id == log.userId) ? 
-                  <tr class="odd:bg-white/70 even:bg-gray-50/70 hover:bg-gray-100/60" index={index}>
+                  <tr class="odd:bg-white/70 even:bg-gray-50/70 hover:bg-gray-100/60" index={index} key={index}>
                     <td class="border border-gray-300 px-4 py-2">{ind++}</td>
                     <td class="border border-gray-300 px-4 py-2">{obj.subject}</td>
                     <td class="border border-gray-300 px-4 py-2 text-center">

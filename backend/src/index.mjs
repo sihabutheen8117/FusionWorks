@@ -3,7 +3,6 @@ import mongoose from 'mongoose'
 import cors from 'cors';
 import routerAuth from './Route/Auth.mjs';
 import cookieParser from 'cookie-parser'
-import passport from "passport";
 import session from 'express-session'
 import routerMain from './Route/Main.mjs';
 import routerUser from './Route/User.mjs';
@@ -23,7 +22,7 @@ const PORT = process.env.PORT || 3005
 //connecting to the database
 // 'mongodb://localhost/fusionworks'
 //process.env.MONGODB_CONNECT
-mongoose.connect(process.env.MONGODB_CONNECT)
+mongoose.connect("mongodb://localhost/fusionworks")
 .then(()=>console.log(`Connected to Database`))
 .catch((err)=>console.log(`Error : ${err}`))
 
@@ -32,8 +31,9 @@ mongoose.connect(process.env.MONGODB_CONNECT)
 
 // https://fusionworks-frontend.onrender.com
 // https://fusionworks8117.netlify.app
+// http://localhost:3000
 app.use(cors({
-    origin: 'https://fusionworks-frontend.onrender.com', 
+    origin: 'http://localhost:3000', 
     methods : ['GET' , "POST" , 'PUT' , 'DELETE'], 
     credentials: true 
 }))
@@ -75,13 +75,6 @@ app.use((req, res, next) => {
     };
     next();
 });
-//passport
-
-app.use(passport.initialize())
-app.use(passport.session())
-
-
-
 // routers
 app.use(routerAuth)
 app.use(routerMain)

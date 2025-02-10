@@ -13,8 +13,6 @@ export default passport.use(
   new Strategy(opts, async (payload, done) => {
     try {
       const user = User.findById(payload.id);
-      console.log("from jwt strategy")
-      console.log(user)
       if (user) return done(null, user);
     } catch (error) {
       return done(error ,false);

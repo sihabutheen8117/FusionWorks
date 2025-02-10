@@ -88,7 +88,7 @@ const Clubs = () => {
 
           <div className="m-2 mt-3">
             {
-              select.club_messages ? select.club_messages.map((data , index)=><Clubs_view data={data} name={select.name} index={index}/>) 
+              select.club_messages ? select.club_messages.map((data , index)=><Clubs_view data={data} name={select.name} index={index} key = {index}/>) 
               : 'no data available'
             }
             

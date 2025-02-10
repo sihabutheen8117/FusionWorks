@@ -1,9 +1,11 @@
 import { Router } from "express";
 import { Events } from "../mongoose/schemas/Events.mjs";
+import { verifyToken } from "../strategies/jwt-auth.mjs";
 
 const routerClub = Router();
 
 routerClub.post("/api/events/post" ,
+    verifyToken ,
     async (req, res)=>{
 
         if(!req.user){
@@ -53,7 +55,7 @@ routerClub.post("/api/events/post" ,
 
  })
 
- routerClub.post("/api/events/update/:id" , async (req ,res)=> {
+ routerClub.post("/api/events/update/:id" , verifyToken ,async (req ,res)=> {
 
     if(!req.user){
         return res.status(401).json({
@@ -106,7 +108,7 @@ routerClub.post("/api/events/post" ,
  })
 
 
- routerClub.delete("/api/events/delete/:id" , async (req ,res)=>{
+ routerClub.delete("/api/events/delete/:id" , verifyToken ,async (req ,res)=>{
 
     if(!req.user){
         return res.status(401).json({

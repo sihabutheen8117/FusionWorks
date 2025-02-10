@@ -2,19 +2,15 @@ import {  Router } from "express";
 import { User } from "../mongoose/schemas/user.mjs";
 import {body, validationResult } from 'express-validator'
 import "../strategies/local-strategy.mjs"
-// import "../strategies/jwt-startegy.mjs"
 import passport from "passport";
 import  jwt  from "jsonwebtoken";
-
+import { verifyUser } from "../strategies/jwt-auth.mjs";
 const routerAuth = Router();
 
 //registering 
 routerAuth.post("/api/register" ,async (req ,res)=>{
 
     const {body} = req ;
-
-    console.log("from Auth.mjs /api/register"+body.user)
-
     try{
         const newuser = new User(body)
         const savedUser = await newuser.save()
@@ -122,19 +118,10 @@ routerAuth.post("/api/register/update", async (req ,res)=>{
 
 //login
 routerAuth.post("/api/login" ,
-    passport.authenticate("local") ,
+    verifyUser ,
     (req,res)=>{
-
-    const user_type = req.user.user_type === "student" ? false : true
-
-    const accessToken = jwt.sign({ username: req.user.name }, 'secret' ,{ expiresIn : '1d'});
-
-    res.cookie('jwt', accessToken , {
-        httpOnly : true ,
-        maxAge : 24 * 60 * 60 * 1000,
-        secure : true ,
-        sameSite : 'none'
-    })
+        
+    const user_type = req.user.user_type === "student" ? false : true ;
     
     res.status(200).send({
         error : "",

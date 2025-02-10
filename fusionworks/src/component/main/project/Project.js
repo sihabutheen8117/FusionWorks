@@ -14,7 +14,7 @@ const Project = () => {
 
   const [search ,setSearch] = useState("")
   const [filter,setFilter]  = useState("recent")
-
+  
 
   const [isAddProjectOpen, setIsAddProjectOpen] = useState(false); // State to manage the visibility of the AddProject component
 

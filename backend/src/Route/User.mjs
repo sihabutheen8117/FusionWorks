@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { Projects } from "../mongoose/schemas/Projects.mjs";
 import { Discussion } from "../mongoose/schemas/discussion.mjs";
+import { verifyToken } from "../strategies/jwt-auth.mjs";
 
 const routerUser = Router()
 
-routerUser.post("/api/project/post" ,async (req,res)=>{
+routerUser.post("/api/project/post" ,verifyToken ,async (req,res)=>{
 
     if(!req.user){
         return res.status(401).json({
@@ -59,7 +60,7 @@ routerUser.post("/api/project/post" ,async (req,res)=>{
     }
 })
 
-routerUser.post("/api/projects/update/" , async (req ,res)=>{
+routerUser.post("/api/projects/update/" , verifyToken ,async (req ,res)=>{
 
     if(!req.user){
         return res.status(401).json({
@@ -131,9 +132,7 @@ routerUser.post("/api/projects/update/" , async (req ,res)=>{
         
         
         finalUpdateObject.$set = updateObject 
-        
-        console.log(finalUpdateObject)
-
+       
 
         const updateProject =await Projects.findByIdAndUpdate(
             id,
@@ -184,7 +183,7 @@ routerUser.post("/api/projects/update/" , async (req ,res)=>{
     }
 })
 
-routerUser.post("/api/projects/delete/" , async (req ,res)=>{
+routerUser.post("/api/projects/delete/" ,verifyToken , async (req ,res)=>{
 
     if(!req.user){
         return res.status(401).json({
@@ -215,7 +214,7 @@ routerUser.post("/api/projects/delete/" , async (req ,res)=>{
     }
 })
 
-routerUser.post("/api/discussionForum/Message/" ,async (req, res)=> {
+routerUser.post("/api/discussionForum/Message/" ,verifyToken ,async (req, res)=> {
     if(!req.user){
         return res.status(401).json({
             status : "not authendicated"
@@ -271,7 +270,7 @@ routerUser.post("/api/discussionForum/Message/" ,async (req, res)=> {
 
 })
 
-routerUser.post("/api/discussionForum/Message/:id" , async (req ,res)=>{
+routerUser.post("/api/discussionForum/Message/:id" ,verifyToken , async (req ,res)=>{
     if(!req.user){
         return res.status(401).json({
             status : "not authendicated"
