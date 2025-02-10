@@ -52,7 +52,10 @@ export const verifyUser = async (req , res , next ) => {
                 message : "Invalid password"
             })
         }
-        res.cookie("token", genToken(body.user), { httpOnly: true });
+        res.cookie("token", genToken(body.user), { httpOnly: true ,
+            secure : true ,
+            sameSite : "None"
+         });
         req.user = user ;
         next();
     }

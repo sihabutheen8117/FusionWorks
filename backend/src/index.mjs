@@ -51,7 +51,7 @@ app.use(session({
         maxAge : 60000 * 60,
         httpOnly : true,
         secure: true,       // Ensures cookies are only sent over HTTPS
-        sameSite: 'none',
+        sameSite: 'None',
         domain : '.onrender.com'
     },
     // store : MongoStore.create({
