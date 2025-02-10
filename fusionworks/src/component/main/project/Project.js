@@ -14,7 +14,7 @@ const Project = () => {
 
   const [search ,setSearch] = useState("")
   const [filter,setFilter]  = useState("recent")
-  
+
 
   const [isAddProjectOpen, setIsAddProjectOpen] = useState(false); // State to manage the visibility of the AddProject component
 
@@ -44,8 +44,8 @@ const Project = () => {
             }}
             className='h-10 text-white w-[17rem] md:w-[34rem] border border-gray-300 rounded-full py-2 px-4 pr-10 focus:outline-none focus:ring focus:ring-blue-500 bg-[#142347]'
             />
-            <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-              <i class="fas fa-search text-gray-500"></i>
+            <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+              <i className="fas fa-search text-gray-500"></i>
             </span>
           </div>
           <select value={filter} 

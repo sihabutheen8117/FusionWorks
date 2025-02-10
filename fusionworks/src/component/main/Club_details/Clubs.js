@@ -63,8 +63,8 @@ const Clubs = () => {
                 }}
                 className='h-10 text-white w-[17rem] md:w-[34rem] border border-gray-300 rounded-full py-2 px-4 pr-10 focus:outline-none focus:ring focus:ring-blue-500 bg-[#142347]'
                 />
-                <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <i class="fas fa-search text-gray-500"></i>
+                <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                  <i className="fas fa-search text-gray-500"></i>
                 </span>
             </div>
         </div>
@@ -87,11 +87,12 @@ const Clubs = () => {
         </div>
 
           <div className="m-2 mt-3">
-            {
-              select.club_messages ? select.club_messages.map((data , index)=><Clubs_view data={data} name={select.name} index={index} key = {index}/>) 
-              : 'no data available'
+          {select?.club_messages?.length > 0 
+            ? select.club_messages.map((data, index) => (
+                <Clubs_view data={data} name={select.name} index={index} key={index} />
+              )) 
+            : 'Oops ! no data available'
             }
-            
           </div>
 
           {isAdd && <AddClubMessage onClose={closeAddEvent}/>}
