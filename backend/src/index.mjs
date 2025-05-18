@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 3005
 //connecting to the database
 // 'mongodb://localhost/fusionworks'
 //process.env.MONGODB_CONNECT
-mongoose.connect('process.env.MONGODB_CONNECT')
+mongoose.connect(process.env.MONGODB_CONNECT)
 .then(()=>console.log(`Connected to Database`))
 .catch((err)=>console.log(`Error : ${err}`))
 
