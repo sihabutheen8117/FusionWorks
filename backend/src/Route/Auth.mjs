@@ -5,6 +5,7 @@ import "../strategies/local-strategy.mjs"
 import passport from "passport";
 import  jwt  from "jsonwebtoken";
 import { verifyUser } from "../strategies/jwt-auth.mjs";
+import { verifyToken } from "../strategies/jwt-auth.mjs";
 const routerAuth = Router();
 
 //registering 
@@ -49,7 +50,7 @@ routerAuth.post("/api/register" ,async (req ,res)=>{
 
 
 //update register
-routerAuth.post("/api/register/update", async (req ,res)=>{
+routerAuth.post("/api/register/update", verifyToken ,async (req ,res)=>{
 
     if(!req.user){
        return res.status(500).send({

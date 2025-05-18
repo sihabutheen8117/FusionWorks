@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const MainHeader = () => {
 
-  const name = useSelector((state)=>state.user.log)
+  const name = useSelector((state)=>state.user.log) ;
   return (
     <div className='bg-[#101A35]'>
       <div className='border-b-2 border-cyan-300'>

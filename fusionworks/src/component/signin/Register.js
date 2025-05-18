@@ -43,7 +43,7 @@ const Register = () => {
   return (
     <div>
       {/* after successful register navigate to main page */}
-      {isSuccess ? navigate('/main') : ""}
+      {isSuccess ? navigate('/') : ""}
 
       <div className='m-2 bg-rose-600 hover:bg-rose-400 rounded-full w-20 h-8 flex items-center justify-center shadow-lg'>
         <Link to="/" className="font-roboto font-bold text-white">Home</Link>
@@ -85,7 +85,7 @@ const Register = () => {
               <div className='relative'>
                 <input id="password" type="password" placeholder='create password'
                 required
-                minlength="8"
+                minLength="8"
                 onChange={(event)=>{
                   setCredentials(preCredentials=>{
                     return {
@@ -103,7 +103,7 @@ const Register = () => {
               <div className='relative'>
                 <input id="rePassword" type="password" placeholder='re enter password'
                 required
-                minlength="8"
+                minLength="8"
                 onChange={(event)=>{
 
                   event.target.addEventListener('input',function(){
@@ -161,60 +161,89 @@ const Register = () => {
                 </label>
               </div>
 
+
+              <div className="relative">
+                <select
+                  id="user_type"
+                  value={credentials.user_type || "student"} // Set default value to "Student"
+                  onChange={(event) => {
+                    setCredentials((preCredentials) => ({
+                      ...preCredentials,
+                      user_type: event.target.value,
+                    }));
+                  }}
+                  className="w-64 text-blue-100 border-2 border-cyan-400 bg-[#101B35] rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none px-2 py-1 mb-4"
+                >
+                  <option value="student">Student</option>
+                  <option value="club">Clubs</option>
+                </select>
+
+                <label className="absolute -top-3 left-4 bg-[#101B35] px-1 text-blue-100 font-semibold text-sm">
+                  Account Type
+                </label>
+              </div>
+
+
               
               <div>
 
-                <div className='relative'>
-                  <input id="department" type="text" placeholder='department'
-                  onChange={(event)=>{
-                    setCredentials(preCredentials=>{
-                      return {
-                        ...preCredentials,
-                        department : event.target.value ,
-                      }
-                    })
-                  }}
-                  className="w-64 text-blue-100 border-2 border-cyan-400 bg-[#101B35] rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none px-2 py-1 mb-4"/>
-                  <label className="absolute -top-3 left-4 bg-[#101B35] px-1 text-blue-100 font-semibold text-sm">
-                    department
-                  </label>
-                </div>
 
-                <div className='relative'>
-                  <input id="section" type="text" placeholder='section in capital letter'
-                  onChange={(event)=>{
-                    setCredentials(preCredentials=>{
-                      return {
-                        ...preCredentials,
-                        section : event.target.value ,
-                      }
-                    })
-                  }}
-                  className="w-64 text-blue-100 border-2 border-cyan-400 bg-[#101B35] rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none px-2 py-1 mb-4"/>
-                  <label className="absolute -top-3 left-4 bg-[#101B35] px-1 text-blue-100 font-semibold text-sm">
-                    section
-                  </label>
-                </div>
-                
-              
-                <select id="year" name='year'
-                value = {credentials.year}
-                onChange={(event)=>{
-                  setCredentials(preCredentials=>{
-                    return {
-                      ...preCredentials,
-                      year : event.target.value ,
-                    }
-                  })
-                }}
-                className='mb-5 block appearance-none w-full bg-[#101B35] text-white border border-cyan-400 rounded-lg py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-cyan-700 hover:bg-cyan-800 '
-                >
-                  <option value="1">1st year</option>
-                  <option value="2">2nd year</option>
-                  <option value="3">3rd year</option>
-                  <option value="4">4th year</option>
-                </select>
+              {
+                  credentials.user_type !== "club" && 
+                  <>
+                      <div className='relative'>
+                      <input id="department" type="text" placeholder='department'
+                      onChange={(event)=>{
+                        setCredentials(preCredentials=>{
+                          return {
+                            ...preCredentials,
+                            department : event.target.value ,
+                          }
+                        })
+                      }}
+                      className="w-64 text-blue-100 border-2 border-cyan-400 bg-[#101B35] rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none px-2 py-1 mb-4"/>
+                      <label className="absolute -top-3 left-4 bg-[#101B35] px-1 text-blue-100 font-semibold text-sm">
+                        department
+                      </label>
+                    </div>
+                  
 
+                    <div className='relative'>
+                      <input id="section" type="text" placeholder='section in capital letter'
+                      onChange={(event)=>{
+                        setCredentials(preCredentials=>{
+                          return {
+                            ...preCredentials,
+                            section : event.target.value ,
+                          }
+                        })
+                      }}
+                      className="w-64 text-blue-100 border-2 border-cyan-400 bg-[#101B35] rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none px-2 py-1 mb-4"/>
+                      <label className="absolute -top-3 left-4 bg-[#101B35] px-1 text-blue-100 font-semibold text-sm">
+                        section
+                      </label>
+                    </div>
+                    
+                  
+                    <select id="year" name='year'
+                    value = {credentials.year}
+                    onChange={(event)=>{
+                      setCredentials(preCredentials=>{
+                        return {
+                          ...preCredentials,
+                          year : event.target.value ,
+                        }
+                      })
+                    }}
+                    className='mb-5 block appearance-none w-full bg-[#101B35] text-white border border-cyan-400 rounded-lg py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-cyan-700 hover:bg-cyan-800 '
+                    >
+                      <option value="1">1st year</option>
+                      <option value="2">2nd year</option>
+                      <option value="3">3rd year</option>
+                      <option value="4">4th year</option>
+                    </select>
+                  </>
+              }
             
                 
                 <div className='relative'>

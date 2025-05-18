@@ -39,6 +39,30 @@ routerMain.get("/api/events" ,verifyToken ,async (req,res)=>{
 
 })
 
+routerMain.get("/api/getMyDetails" , verifyToken ,
+    async ( req , res )=>{
+
+        if(!req.user){
+            return res.status(401).send({
+                error : "not Authendicated"
+            })
+        }
+
+        try{
+            delete req.user.password ;
+            console.log(req.user);
+            res.status(200).send(req.user);
+        }
+        catch(err)
+        {
+            res.status(500).send({
+                status : "error while user details",
+                error : err
+            })
+        }
+    }
+)
+
 routerMain.get("/api/projects" ,
     verifyToken ,
     async (req,res)=>{

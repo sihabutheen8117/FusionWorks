@@ -66,6 +66,10 @@ export const userPostApi = createApi({
             providesTags: ['Clubs'],
         }),
 
+        getUserDetails : builder.query({
+            query : () => '/api/getMyDetails',
+        }),
+
         postClubs : builder.mutation({
             query : (newPost) => ({
                 url : `/api/register/update`,
@@ -98,6 +102,7 @@ export const {usePostProjectMutation
         ,useGetMessageQuery
         ,usePostApplyMutation
         ,useGetClubsQuery
+        ,useGetUserDetailsQuery
         ,usePostClubsMutation
         ,useDeleteProjectMutation
      } = userPostApi ;

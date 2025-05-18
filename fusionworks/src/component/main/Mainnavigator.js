@@ -1,12 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 const Mainnavigator = () => {
-
+  const nav = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [option ,setOption] = useState('Project')
 
+  const onLogOut = () => {
+    localStorage.removeItem('userLog');
+    nav("/");
+  }
 
   return (
     <div>
@@ -76,8 +80,17 @@ const Mainnavigator = () => {
           >
             <Link to="/main/dashBoard">Dashboard</Link>
           </div>
+
+          <div className='flex justify-center'>
+            <button className='bg-red-500 hover:bg-red-600 text-white rounded-lg px-7 mt-4 py-1 flex justify-center text-lg font-semibold' 
+            onClick={onLogOut}
+            >
+              Log out
+            </button>
+          </div>
           
         </div>
+
       </div>
     </nav>
 

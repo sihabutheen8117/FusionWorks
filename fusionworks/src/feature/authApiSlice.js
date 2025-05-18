@@ -22,7 +22,6 @@ export const authApiSlice = createApi({
                 console.log("onquery triggered !!!")
                 try {
                     const {data} = await queryFulfilled ;
-                    console.log("authApiSlice : " + data)
                     dispatch(storeUserLog(data))
                 }
                 catch(err) {
